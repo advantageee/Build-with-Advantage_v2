@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35417.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build with Advantage", "Build with Advantage.csproj", "{EBE7FD1F-324A-4B5D-9643-99C565B07B04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvantageAI_Server", "..\AdvantageAI_Server\AdvantageAI_Server.csproj", "{58B88741-CD37-409C-A7BA-B5DFEF76E02E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvantageAI_Server", "AdvantageAI_Server\AdvantageAI_Server.csproj", "{01C47095-C67B-44EB-A9A6-9150A0055BD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{EBE7FD1F-324A-4B5D-9643-99C565B07B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBE7FD1F-324A-4B5D-9643-99C565B07B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBE7FD1F-324A-4B5D-9643-99C565B07B04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58B88741-CD37-409C-A7BA-B5DFEF76E02E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58B88741-CD37-409C-A7BA-B5DFEF76E02E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58B88741-CD37-409C-A7BA-B5DFEF76E02E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58B88741-CD37-409C-A7BA-B5DFEF76E02E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C47095-C67B-44EB-A9A6-9150A0055BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C47095-C67B-44EB-A9A6-9150A0055BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C47095-C67B-44EB-A9A6-9150A0055BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C47095-C67B-44EB-A9A6-9150A0055BD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
