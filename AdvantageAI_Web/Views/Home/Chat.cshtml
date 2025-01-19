@@ -1,0 +1,154 @@
+@model AdvantageAIWeb.ViewModels.ChatViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Chat - AdvantageAI";
+}
+
+<div class="container mt-4">
+    <h1>Chat with AI</h1>
+    <div class="chat-box border rounded p-3">
+        <div id="conversationHistory" class="conversation-history mb-3" style="height: 400px; overflow-y: auto;">
+            @foreach (var message in Model.ConversationHistory)
+            {
+                <div class="message @(message.Role == "User" ? "user" : "bot") mb-2 p-2 @(message.Role == "User" ? "text-end" : "")">
+                    <strong>@(message.Role == "User" ? "You" : "AI"):</strong>
+                    <p class="mb-0">@message.Content</p>
+                </div>
+            }
+        </div>
+
+        <form id="chatForm" method="post" action="@Url.Action("Chat", "Home")" class="mt-3">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <textarea id="userMessage" name="userMessage" class="form-control"
+                          rows="2" placeholder="Type your message here..."
+                          maxlength="2000"></textarea>
+                <div class="char-counter text-muted small">
+                    <span id="charCount">0</span>/2000
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="button" class="btn btn-secondary" id="clearChat">Clear Chat</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // AdvantageAI namespace and chat handling
+        var AdvantageAI = AdvantageAI || {};
+        AdvantageAI.Chat = {
+            // Get CSRF token from the form
+            getCsrfToken: function () {
+                return $('input[name="__RequestVerificationToken"]').val();
+            },
+
+            // Show error message
+            showErrorMessage: function (message) {
+                const errorDiv = $('<div>')
+                    .addClass('alert alert-danger alert-dismissible fade show mt-2')
+                    .html(`
+                            ${message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        `);
+                $('#chatForm').before(errorDiv);
+                setTimeout(() => errorDiv.alert('close'), 5000);
+            },
+
+            // Append message to chat
+            appendMessage: function (message, isUser) {
+                const messageDiv = $('<div>')
+                    .addClass(`message ${isUser ? 'user' : 'bot'} mb-2 p-2 ${isUser ? 'text-end' : ''}`)
+                    .html(`
+                            <strong>${isUser ? 'You' : 'AI'}:</strong>
+                            <p class="mb-0">${this.escapeHtml(message)}</p>
+                        `);
+                $('#conversationHistory').append(messageDiv);
+                this.scrollToBottom();
+            },
+
+            // Escape HTML to prevent XSS
+            escapeHtml: function (unsafe) {
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            },
+
+            // Scroll chat to bottom
+            scrollToBottom: function () {
+                const conversationHistory = $('#conversationHistory');
+                conversationHistory.scrollTop(conversationHistory[0].scrollHeight);
+            },
+
+            // Send message
+            sendMessage: function (message) {
+                $.ajax({
+                    url: $('#chatForm').attr('action'),
+                    type: 'POST',
+                    data: {
+                        userMessage: message,
+                        __RequestVerificationToken: this.getCsrfToken()
+                    },
+                    success: (response) => {
+                        if (response.success) {
+                            this.appendMessage(message, true);
+                            this.appendMessage(response.response, false);
+                            $('#userMessage').val('');
+                            $('#charCount').text('0');
+                        } else {
+                            this.showErrorMessage(response.error || 'An error occurred.');
+                        }
+                    },
+                    error: (xhr, status, error) => {
+                        this.showErrorMessage('Failed to send the message. Please try again.');
+                    }
+                });
+            }
+        };
+
+        $(document).ready(function () {
+            // Initialize
+            AdvantageAI.Chat.scrollToBottom();
+
+            // Character counter
+            $('#userMessage').on('input', function () {
+                const charCount = $(this).val().length;
+                $('#charCount').text(charCount);
+                if (charCount > 1990) {
+                    $('#charCount').addClass('text-danger');
+                } else {
+                    $('#charCount').removeClass('text-danger');
+                }
+            });
+
+            // Form submission
+            $('#chatForm').on('submit', function (event) {
+                event.preventDefault();
+                const message = $('#userMessage').val().trim();
+
+                if (!message) {
+                    AdvantageAI.Chat.showErrorMessage('Message cannot be empty.');
+                    return;
+                }
+
+                AdvantageAI.Chat.sendMessage(message);
+            });
+
+            // Clear chat
+            $('#clearChat').on('click', function () {
+                if (confirm('Are you sure you want to clear the chat history?')) {
+                    $('#conversationHistory').empty();
+                    $('#userMessage').val('');
+                    $('#charCount').text('0');
+                }
+            });
+        });
+    </script>
+}
