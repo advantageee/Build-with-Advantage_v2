@@ -109,6 +109,34 @@ public class HomeController : Controller
         }
     }
 
+    // Action to handle document upload and translation
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> UploadDocument(HttpPostedFileBase file, string targetLanguage)
+    {
+        if (file == null || file.ContentLength == 0 || string.IsNullOrEmpty(targetLanguage))
+        {
+            _logger.LogError("File or Target Language is missing.");
+            return Json(new { success = false, message = "File or Target Language is missing" });
+        }
+
+        try
+        {
+            var fileName = Path.GetFileName(file.FileName);
+            var filePath = Path.Combine(Server.MapPath("~/App_Data/Uploads"), fileName);
+            file.SaveAs(filePath);
+
+            var translatedFilePath = await _translatorService.TranslateDocumentAsync(filePath, targetLanguage);
+
+            return Json(new { success = true, translatedFilePath });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Document translation failed: {ex.Message}");
+            return Json(new { success = false, message = "Document translation failed" });
+        }
+    }
+
     // Dispose method to clean up resources
     protected override void Dispose(bool disposing)
     {
