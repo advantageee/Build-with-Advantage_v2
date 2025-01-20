@@ -7,7 +7,6 @@ using Unity;
 using System.Web.Optimization;
 using AdvantageAI_Web.App_Start;
 
-
 namespace AdvantageAI_Web
 {
     public class MvcApplication : System.Web.HttpApplication
