@@ -30,6 +30,9 @@
                             <button type="button" id="generateBtn" class="btn btn-primary">Generate</button>
                             <button type="button" id="clearBtn" class="btn btn-secondary">Clear</button>
                         </div>
+                        <div class="char-counter text-muted small">
+                            <span id="charCount">0</span>/2000
+                        </div>
                     }
                 </div>
 
@@ -115,7 +118,14 @@
 
             // Show error message
             showErrorMessage: function (message) {
-                alert(message);
+                const errorDiv = $('<div>')
+                    .addClass('alert alert-danger alert-dismissible fade show mt-2')
+                    .html(`
+                            ${message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        `);
+                $('#promptForm').before(errorDiv);
+                setTimeout(() => errorDiv.alert('close'), 5000);
             },
 
             // Copy text to clipboard
@@ -135,6 +145,8 @@
                     return;
                 }
 
+                $('#generateBtn').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating...');
+
                 $.ajax({
                     url: '/Home/GenerateContent',
                     type: 'POST',
@@ -150,6 +162,9 @@
                     },
                     error: function (xhr, status, error) {
                         AdvantageAI.Content.showErrorMessage('Error generating content: ' + error);
+                    },
+                    complete: function () {
+                        $('#generateBtn').prop('disabled', false).html('Generate');
                     }
                 });
             },
@@ -161,6 +176,8 @@
                     this.showErrorMessage('Please select a language');
                     return;
                 }
+
+                $('#translateAllBtn').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Translating...');
 
                 $.ajax({
                     url: '/Home/TranslateContent',
@@ -181,6 +198,9 @@
                     },
                     error: function (xhr, status, error) {
                         AdvantageAI.Content.showErrorMessage('Error translating content: ' + error);
+                    },
+                    complete: function () {
+                        $('#translateAllBtn').prop('disabled', false).html('Translate All');
                     }
                 });
             }
@@ -207,6 +227,17 @@
                 $('#Title').val('');
                 $('#Description').val('');
                 $('#Keywords').val('');
+            });
+
+            // Character counter
+            $('#PromptInput').on('input', function () {
+                const charCount = $(this).val().length;
+                $('#charCount').text(charCount);
+                if (charCount > 1990) {
+                    $('#charCount').addClass('text-danger');
+                } else {
+                    $('#charCount').removeClass('text-danger');
+                }
             });
         });
     </script>
