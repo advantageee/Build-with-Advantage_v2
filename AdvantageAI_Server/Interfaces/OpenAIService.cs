@@ -5,8 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AdvantageAIWeb.Models.AI;
-using AdvantageAIWeb.Models.Chat;
 using AdvantageAIWeb.Services.Interfaces;
 using NLog;
 

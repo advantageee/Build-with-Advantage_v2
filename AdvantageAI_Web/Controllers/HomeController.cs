@@ -56,8 +56,7 @@ public class HomeController : Controller
     {
         try
         {
-            // Correct async call, storing result
-            await result = await _aiService.GenerateContentAsync(prompt);  // Async call to service
+            var result = await _aiService.GenerateContentAsync(prompt);  // Async call to service
 
             // Check if result is not null and contains valid data
             if (result != null)
