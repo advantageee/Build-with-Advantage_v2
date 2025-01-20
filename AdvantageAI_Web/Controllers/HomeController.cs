@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System;
 using AvantageAI_Server.Controllers;
 using AdvantageAI_Web.Models.ViewModels;
-
+using System.Web;
 
 public class HomeController : Controller
 {
@@ -106,6 +106,35 @@ public class HomeController : Controller
         {
             _logger.LogError($"Translation failed: {ex.Message}");
             return Json(new { success = false, message = "Translation failed" });
+        }
+    }
+
+    // Action to handle document upload
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> UploadDocument(HttpPostedFileBase file)
+    {
+        if (file == null || file.ContentLength == 0)
+        {
+            _logger.LogError("No file uploaded.");
+            return Json(new { success = false, message = "No file uploaded" });
+        }
+
+        try
+        {
+            var fileName = Path.GetFileName(file.FileName);
+            var filePath = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+            file.SaveAs(filePath);
+
+            // Process the uploaded document
+            var result = await _aiService.ProcessDocumentAsync(filePath);
+
+            return Json(new { success = true, result });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Document upload failed: {ex.Message}");
+            return Json(new { success = false, message = "Document upload failed" });
         }
     }
 
