@@ -1,5 +1,3 @@
-using AAdvantageAI_Server.Interfaces; // Typo in namespace?
-using AdvantageAI.Services.Interfaces;
 using AdvantageAI_Server.Models;
 using AdvantageAI_Server.Services;
 using AdvantageAIWeb.Services;
@@ -27,8 +25,7 @@ namespace AdvantageAI_Web.App_Start
             var dalleEndpoint = ConfigurationManager.AppSettings["DalleEndpointUrl"];
             var blobConnectionString = ConfigurationManager.AppSettings["BlobStorageConnectionString"];
 
-            
-            container.RegisterType<IAdvantageAIService, AdvantageAIService>();
+            IUnityContainer aiServiceContainer = container.RegisterType<IAdvantageAIService, IAdvantageAIService>();
             container.RegisterType<ITranslatorService, TranslatorService>();
             container.RegisterType<IOpenAIService, OpenAIService>();
             container.RegisterType<IVisionService, VisionService>();

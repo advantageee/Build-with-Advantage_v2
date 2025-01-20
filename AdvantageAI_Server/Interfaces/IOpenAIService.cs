@@ -1,6 +1,8 @@
-﻿using AdvantageAIWeb.Models.AI;
+﻿using AdvantageAI_Server.Services;
+using AdvantageAIWeb.Models.AI;
 using AdvantageAIWeb.Models.Chat;
 using AdvantageAIWeb.ViewModels;
+using Azure.AI.OpenAI;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
+using Microsoft.Build.Utilities;
 using NLog;
 
 namespace AdvantageAIWeb.Services
@@ -8,7 +9,7 @@ namespace AdvantageAIWeb.Services
     public class CodeGenerationService : ICodeGenerationService
     {
         private readonly IOpenAIService _openAIService;
-        private readonly Logger _logger;
+        private readonly NLog.Logger _logger;
 
         public CodeGenerationService(IOpenAIService openAIService)
         {

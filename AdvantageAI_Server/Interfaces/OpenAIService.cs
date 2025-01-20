@@ -6,9 +6,11 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
+using Azure.AI.OpenAI;
 using NLog;
+using RestSharp;
 
-namespace AdvantageAIWeb.Services
+namespace AdvantageAI_Server.Services
 {
     public class OpenAIService : IOpenAIService
     {
@@ -16,6 +18,8 @@ namespace AdvantageAIWeb.Services
         private readonly string _endpoint;
         private readonly HttpClient _httpClient;
         private readonly Logger _logger;
+
+        public object RequestBody { get; private set; }
 
         public OpenAIService(string apiKey, string endpoint)
         {
@@ -136,7 +140,7 @@ namespace AdvantageAIWeb.Services
                 throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
             }
 
-            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToLowerInvariant(), content = msg.Content }).ToArray();
+            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
             var requestBody = new { messages };
 
             try
@@ -151,19 +155,24 @@ namespace AdvantageAIWeb.Services
                 throw new InvalidOperationException("Failed to get chat completion.", ex);
             }
         }
-        public AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId)
+       public Task<string> GenerateCodeSnippetAsync(string prompt)
+        {
+            throw new NotImplementedException();
+        }
+
+       public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory)
         {
             if (conversationHistory == null || conversationHistory.Count == 0)
             {
                 throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
             }
 
-            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToLowerInvariant(), content = msg.Content }).ToArray();
+            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
             var requestBody = new { messages };
 
             try
             {
-                var response = SendPostRequestAsync("/chat/completions", requestBody).GetAwaiter().GetResult();
+                var response = await SendPostRequestAsync("/chat/completions", requestBody);
                 var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
                 return new AIResponse { Content = result?.Messages?[0]?.Content };
             }
@@ -174,14 +183,54 @@ namespace AdvantageAIWeb.Services
             }
         }
 
-        public Task<string> GenerateCodeSnippetAsync(string prompt)
+        public AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId)
         {
             throw new NotImplementedException();
         }
-
+             
     }
+
+    public class AIResponse
+    {
+        public string Content { get; internal set; }
+    }
+
     internal class ChatCompletionResult
     {
         public List<ChatMessage> Messages { get; set; }
+    }
+
+    internal class ChatMessageModel
+    {
+        public int Role { get; }
+        public string Content { get; }
+        public string V { get; }
+
+        public ChatMessageModel(int role, string content)
+        {
+            Role = role;
+            Content = content;
+        }
+
+        public ChatMessageModel(string v, string content)
+        {
+            V = v;
+            Content = content;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ChatMessageModel other &&
+                   Role == other.Role &&
+                   Content == other.Content;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -281754749;
+            hashCode = hashCode * -1521134295 + Role.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Content);
+            return hashCode;
+        }
     }
 }

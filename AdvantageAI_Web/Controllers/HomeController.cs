@@ -1,5 +1,4 @@
-﻿using AdvantageAI.Services.Interfaces;
-using AdvantageAIWeb.Services.Interfaces;
+﻿using AdvantageAIWeb.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading.Tasks;
@@ -7,6 +6,7 @@ using System.Web.Mvc;
 using System;
 using AvantageAI_Server.Controllers;
 using AdvantageAI_Web.Models.ViewModels;
+
 
 public class HomeController : Controller
 {
@@ -40,6 +40,7 @@ public class HomeController : Controller
         _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
         _stream = new MemoryStream();
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        result = Task.CompletedTask; // Initialize the result field
     }
 
     // Index action for rendering the view
@@ -49,6 +50,9 @@ public class HomeController : Controller
         _logger.LogInformation("Index action called.");
         return View(model);
     }
+
+    public async Task GetVAsync() => await result;
+
     // Action to handle content generation via AJAX
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -56,7 +60,7 @@ public class HomeController : Controller
     {
         try
         {
-            var result = await _aiService.GenerateContentAsync(prompt);  // Async call to service
+            var result = await _aiService.GenerateContentAsync(prompt);
 
             // Check if result is not null and contains valid data
             if (result != null)

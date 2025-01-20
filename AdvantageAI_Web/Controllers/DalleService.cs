@@ -3,9 +3,9 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AdvantageAIWeb.Models.Image;
 using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
-using AvantageAI_Server.Models.Image;
 using Logger = NLog.Logger;
 
 public class DalleService : IDalleService

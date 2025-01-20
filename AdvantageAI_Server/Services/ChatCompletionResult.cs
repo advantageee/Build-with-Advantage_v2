@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using AdvantageAIWeb.Models.Chat;
+using Azure.AI.OpenAI;
 
 namespace AdvantageAIWeb.Models.AI
 {
