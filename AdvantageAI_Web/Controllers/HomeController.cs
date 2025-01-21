@@ -24,12 +24,6 @@ namespace AdvantageAI_Web.Controllers
         private static readonly Task completedTaskInstance = Task.CompletedTask;
         private Task result = completedTaskInstance;
 
-        public HomeController(string filePath)
-        {
-            this.filePath = filePath;
-        }
-
-        private string filePath;
         private readonly string _filePath;
 
         public HomeController(
@@ -52,7 +46,7 @@ namespace AdvantageAI_Web.Controllers
             _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
             _stream = new MemoryStream();
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.filePath = filePath;
+            _filePath = filePath;
         }
 
         // Index action for rendering the view
@@ -109,7 +103,7 @@ namespace AdvantageAI_Web.Controllers
             try
             {
                 // Correct async call for translation
-                await _aiService.ProcessDocumentAsync(filePath);
+                await _aiService.ProcessDocumentAsync(_filePath);
                 return Json(new { success = true, message = "Document processed successfully" });
             }
             catch (Exception ex)
