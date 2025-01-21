@@ -138,6 +138,78 @@ public class HomeController : Controller
         }
     }
 
+    // Action to handle code snippet generation via AJAX
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> GenerateCodeSnippet(string prompt, string language)
+    {
+        if (string.IsNullOrEmpty(prompt) || string.IsNullOrEmpty(language))
+        {
+            _logger.LogError("Prompt or Language is missing.");
+            return Json(new { success = false, message = "Prompt or Language is missing" });
+        }
+
+        try
+        {
+            var codeSnippet = await _codeGenerationService.GenerateCodeSnippetAsync(prompt, language);
+            return Json(new { success = true, codeSnippet });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Code snippet generation failed: {ex.Message}");
+            return Json(new { success = false, message = "Code snippet generation failed" });
+        }
+    }
+
+    // Action to handle image generation via AJAX
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> GenerateImage(string prompt, string size, string style)
+    {
+        if (string.IsNullOrEmpty(prompt) || string.IsNullOrEmpty(size) || string.IsNullOrEmpty(style))
+        {
+            _logger.LogError("Prompt, Size, or Style is missing.");
+            return Json(new { success = false, message = "Prompt, Size, or Style is missing" });
+        }
+
+        try
+        {
+            var imageResult = await _dalleService.GenerateImageAsync(prompt, size, style);
+            return Json(new { success = true, imageUrl = imageResult });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Image generation failed: {ex.Message}");
+            return Json(new { success = false, message = "Image generation failed" });
+        }
+    }
+
+    // Action to handle image caption generation via AJAX
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> GenerateImageCaption(HttpPostedFileBase file)
+    {
+        if (file == null || file.ContentLength == 0)
+        {
+            _logger.LogError("No file uploaded.");
+            return Json(new { success = false, message = "No file uploaded" });
+        }
+
+        try
+        {
+            using (var stream = file.InputStream)
+            {
+                var caption = await _visionService.GenerateCaptionAsync(stream);
+                return Json(new { success = true, caption });
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Image caption generation failed: {ex.Message}");
+            return Json(new { success = false, message = "Image caption generation failed" });
+        }
+    }
+
     // Dispose method to clean up resources
     protected override void Dispose(bool disposing)
     {

@@ -5,13 +5,11 @@ namespace AdvantageAIWeb.Services.Interfaces
 {
     public interface IAdvantageAIService
     {
-        Task<ContentGenerationResult> GenerateContentAsync(string prompt);  // Changed
-        Task<ContentGenerationResult> GenerateContentAsync(object prompt);  // Changed
-        Task<string> GenerateImageCaptionAsync(Stream stream);  // Changed
-        Task<string> GenerateImageCaptionAsync(object stream);  // Changed
+        Task<ContentGenerationResult> GenerateContentAsync(string prompt);
+        Task<string> GenerateImageCaptionAsync(Stream stream);
         Task ProcessDocumentAsync(string filePath);
-        Task<TranslationResult> TranslateContentAsync(string content, string targetLanguage);  // Changed
-        Task<DocumentTranslationResult> TranslateDocumentAsync(Stream stream, string targetLanguage);  // Changed
+        Task<TranslationResult> TranslateContentAsync(string content, string targetLanguage);
+        Task<DocumentTranslationResult> TranslateDocumentAsync(Stream stream, string targetLanguage);
     }
 
     public class ContentGenerationResult

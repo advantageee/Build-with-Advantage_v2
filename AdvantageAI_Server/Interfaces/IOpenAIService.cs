@@ -21,11 +21,13 @@ namespace AdvantageAIWeb.Services.Interfaces
         Task<string> GenerateChatResponseAsync(string prompt);
 
         /// <summary>
-        /// Generates a code snippet based on the provided prompt.
+        /// Generates a code snippet based on the provided prompt and language.
         /// </summary>
         /// <param name="prompt">The user-provided prompt describing the desired code snippet.</param>
+        /// <param name="language">The programming language for the code snippet.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the generated code snippet.</returns>
-        Task<string> GenerateCodeSnippetAsync(string prompt);
+        Task<string> GenerateCodeSnippetAsync(string prompt, string language);
+
         Task<string> GenerateContentAsync(string prompt);
         AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId);
 

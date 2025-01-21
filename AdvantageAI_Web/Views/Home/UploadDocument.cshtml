@@ -371,7 +371,17 @@
                     $('#uploadProgress').css('width', '0%');
                     $('#progressPercentage').text('0%');
                     $('#progressStatus').text('Preparing document...');
+                }
+            },
 
+            // Show error message
+            showError: function(message) {
+                $('#errorAlert').text(message).removeClass('d-none');
             }
-            </script> 
-    }
+        };
+
+        $(document).ready(function() {
+            AdvantageAI.Document.init();
+        });
+    </script>
+}

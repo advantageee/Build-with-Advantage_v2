@@ -10,6 +10,6 @@ namespace AdvantageAIWeb.Services.Interfaces
     {
         Task<ImageResult> GenerateImageAsync(ImagePromptRequest request);
         Task<string> GenerateImageAsync(string prompt, string size);
-        Task GenerateImageAsync(string prompt, string size, string style);
+        Task<string> GenerateImageAsync(string prompt, string size, string style);
     }
 }

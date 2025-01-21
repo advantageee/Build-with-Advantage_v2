@@ -8,9 +8,7 @@ using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
 using Logger = NLog.Logger;
 
-
 namespace AdvantageAI_Server.Models
-
 {
     public class VisionService : IVisionService
     {

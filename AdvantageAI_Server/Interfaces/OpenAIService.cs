@@ -155,12 +155,43 @@ namespace AdvantageAI_Server.Services
                 throw new InvalidOperationException("Failed to get chat completion.", ex);
             }
         }
-       public Task<string> GenerateCodeSnippetAsync(string prompt)
+
+        public async Task<string> GenerateCodeSnippetAsync(string prompt, string language)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(prompt))
+            {
+                throw new ArgumentException("Prompt cannot be null or empty.", nameof(prompt));
+            }
+
+            if (string.IsNullOrWhiteSpace(language))
+            {
+                throw new ArgumentException("Language cannot be null or empty.", nameof(language));
+            }
+
+            var requestBody = new
+            {
+                messages = new[]
+                {
+                    new { role = "system", content = $"Generate a code snippet in {language}." },
+                    new { role = "user", content = prompt }
+                }
+            };
+
+            try
+            {
+                var response = await SendPostRequestAsync("/chat/completions", requestBody);
+                _logger.Debug($"Code snippet response: {response}");
+                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
+                return result?.Messages?[0]?.Content ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error generating code snippet.");
+                throw new InvalidOperationException("Failed to generate code snippet.", ex);
+            }
         }
 
-       public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory)
+        public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory)
         {
             if (conversationHistory == null || conversationHistory.Count == 0)
             {
