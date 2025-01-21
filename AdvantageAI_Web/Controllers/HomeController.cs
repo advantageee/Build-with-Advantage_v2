@@ -21,6 +21,7 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private Task result;
     private string filePath;
+    private readonly string _filePath;
 
     public HomeController(
         IAdvantageAIService aiService,
@@ -30,7 +31,8 @@ public class HomeController : Controller
         IDalleService dalleService,
         ICodeGenerationService codeGenerationService,
         BlobServiceClient blobServiceClient,
-        ILogger<HomeController> logger)
+        ILogger<HomeController> logger,
+        string filePath)
     {
         _aiService = aiService ?? throw new ArgumentNullException(nameof(aiService));
         _translatorService = translatorService ?? throw new ArgumentNullException(nameof(translatorService));
@@ -42,6 +44,7 @@ public class HomeController : Controller
         _stream = new MemoryStream();
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+        this.filePath = filePath; // Assign the constructor parameter to the field
         result = Task.CompletedTask; // Initialize the result field
     }
 
