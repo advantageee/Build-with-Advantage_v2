@@ -85,24 +85,59 @@ namespace AdvantageAIWeb.Services
             }
         }
 
-                public Task<string> TranslateDocumentAsync(string blobUrl, object targetLanguage)
+        public Task<string> TranslateDocumentAsync(string blobUrl, object targetLanguage)
         {
             throw new NotImplementedException();
         }
 
-        public Task<string> TranslateDocumentAsync(Stream stream, string targetLanguage)
+        public async Task<string> TranslateDocumentAsync(Stream stream, string targetLanguage)
         {
-            throw new NotImplementedException();
+            if (stream == null || !stream.CanRead)
+                throw new ArgumentException("Invalid stream", nameof(stream));
+            if (string.IsNullOrWhiteSpace(targetLanguage))
+                throw new ArgumentException("Target language cannot be null or empty.", nameof(targetLanguage));
+
+            try
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    var text = await reader.ReadToEndAsync();
+                    return await TranslateTextAsync(text, targetLanguage);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error translating document from stream.");
+                throw;
+            }
         }
 
-        public Task TranslateContentAsync(string content, string targetLanguage)
+        public async Task<string> TranslateContentAsync(string content, string targetLanguage)
         {
-            throw new NotImplementedException();
-        }
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                _logger.Warn("Content is null or empty.");
+                throw new ArgumentException("Content cannot be null or empty.", nameof(content));
+            }
 
-        Task<string> ITranslatorService.TranslateContentAsync(string content, string targetLanguage)
-        {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(targetLanguage))
+            {
+                _logger.Warn("Target language is null or empty.");
+                throw new ArgumentException("Target language cannot be null or empty.", nameof(targetLanguage));
+            }
+
+            try
+            {
+                _logger.Info("Translating content to the target language.");
+                var translatedContent = await TranslateTextAsync(content, targetLanguage);
+                _logger.Info("Content translated successfully.");
+                return translatedContent;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Error translating content to target language: {targetLanguage}");
+                throw new InvalidOperationException("Failed to translate content. See inner exception for details.", ex);
+            }
         }
 
         private class TranslationResponse

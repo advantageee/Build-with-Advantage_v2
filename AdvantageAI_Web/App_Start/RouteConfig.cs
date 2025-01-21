@@ -14,6 +14,18 @@ namespace AdvantageAI_Web.App_Start
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Translator",
+                url: "Translator/{action}/{id}",
+                defaults: new { controller = "Translator", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Vision",
+                url: "Vision/{action}/{id}",
+                defaults: new { controller = "Vision", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

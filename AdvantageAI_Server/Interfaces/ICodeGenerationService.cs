@@ -11,6 +11,7 @@ namespace AdvantageAIWeb.Services.Interfaces
         /// Generates a code snippet based on the provided prompt.
         /// </summary>
         /// <param name="prompt">The prompt describing the code to generate.</param>
+        /// <param name="language">The programming language for the code snippet.</param>
         /// <returns>A task representing the asynchronous operation, with the generated code snippet as the result.</returns>
         /// <exception cref="ArgumentException">Thrown if the prompt is null or empty.</exception>
         /// <exception cref="InvalidOperationException">Thrown if the code generation fails.</exception>
