@@ -1,25 +1,26 @@
-using AdvantageAI_Web.App_Start;
+using System.Linq;
 using System.Web.Http;
-using Unity.AspNet.WebApi;
-using Unity;
+using Unity.Mvc5;
+using AdvantageAI_Server;
+
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AdvantageAI_Server.UnityWebApiActivator), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(AdvantageAI_Server.UnityWebApiActivator), "Shutdown")]
 
 namespace AdvantageAI_Web
 {
     public static class UnityWebApiActivator
     {
-        private static IUnityContainer container;
-
+        /// <summary>Integrates Unity when the application starts.</summary>
         public static void Start()
         {
-            container = new UnityContainer();
-            UnityConfig.RegisterComponents(container);
-            var resolver = new UnityDependencyResolver(container);
-            GlobalConfiguration.Configuration.DependencyResolver = resolver;
+            var resolver = new UnityDependencyResolver(UnityConfig.Container);
+            GlobalConfiguration.Configuration.DependencyResolver = (System.Web.Http.Dependencies.IDependencyResolver)resolver;
         }
 
+        /// <summary>Disposes the Unity container when the application is shut down.</summary>
         public static void Shutdown()
         {
-            container?.Dispose();
+            UnityConfig.Container.Dispose();
         }
     }
 }

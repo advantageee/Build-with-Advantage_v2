@@ -7,7 +7,7 @@ namespace AdvantageAI_Server
     /// <summary>
     /// Specifies the Unity configuration for the main container.
     /// </summary>
-    public static class UnityConfig
+    public static class UnityWebApiConfig
     {
         #region Unity Container
         private static Lazy<IUnityContainer> container =
@@ -22,6 +22,11 @@ namespace AdvantageAI_Server
         /// Configured Unity Container.
         /// </summary>
         public static IUnityContainer Container => container.Value;
+
+        public static void RegisterComponents(AdvantageAI_Web.UnityWebApiActivator.IUnityContainer container)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         /// <summary>
