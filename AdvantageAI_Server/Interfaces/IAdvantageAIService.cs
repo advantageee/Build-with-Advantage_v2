@@ -8,6 +8,7 @@ namespace AdvantageAIWeb.Services.Interfaces
         Task<ContentGenerationResult> GenerateContentAsync(string prompt);
         Task<string> GenerateImageCaptionAsync(Stream stream);
         Task ProcessDocumentAsync(string filePath);
+        Task ProcessDocumentAsync(object filePath);
         Task<TranslationResult> TranslateContentAsync(string content, string targetLanguage);
         Task<DocumentTranslationResult> TranslateDocumentAsync(Stream stream, string targetLanguage);
     }

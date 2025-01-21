@@ -20,6 +20,7 @@ public class HomeController : Controller
     private readonly MemoryStream _stream;
     private readonly ILogger<HomeController> _logger;
     private Task result;
+    private string filePath;
 
     public HomeController(
         IAdvantageAIService aiService,
@@ -97,10 +98,8 @@ public class HomeController : Controller
         try
         {
             // Correct async call for translation
-            var translatedContent = await _translatorService.TranslateContentAsync(content, targetLanguage);
-
-            // Return translated content
-            return Json(new { success = true, translatedContent });
+            await _aiService.ProcessDocumentAsync(filePath);
+            return Json(new { success = true, message = "Document processed successfully" });
         }
         catch (Exception ex)
         {
@@ -127,9 +126,8 @@ public class HomeController : Controller
             file.SaveAs(filePath);
 
             // Process the uploaded document
-            var result = await _aiService.ProcessDocumentAsync(filePath);
-
-            return Json(new { success = true, result });
+            await _aiService.ProcessDocumentAsync(filePath);
+            return Json(new { success = true, message = "Document processed successfully" });
         }
         catch (Exception ex)
         {

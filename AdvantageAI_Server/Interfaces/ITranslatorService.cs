@@ -8,5 +8,6 @@ namespace AdvantageAIWeb.Services.Interfaces
         Task<string> TranslateTextAsync(string text, string targetLanguage);
         Task<string> TranslateDocumentAsync(string filePathOrUrl, string targetLanguage);
         Task<string> TranslateDocumentAsync(Stream stream, string targetLanguage);
+        Task TranslateContentAsync(string content, string targetLanguage);
     }
 }
