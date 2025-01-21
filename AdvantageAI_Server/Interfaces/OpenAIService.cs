@@ -218,7 +218,11 @@ namespace AdvantageAI_Server.Services
         {
             throw new NotImplementedException();
         }
-             
+
+        public Task<string> GenerateCodeSnippetAsync(string prompt)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class AIResponse
