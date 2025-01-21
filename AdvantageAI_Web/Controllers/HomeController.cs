@@ -41,6 +41,7 @@ public class HomeController : Controller
         _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
         _stream = new MemoryStream();
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
         result = Task.CompletedTask; // Initialize the result field
     }
 
