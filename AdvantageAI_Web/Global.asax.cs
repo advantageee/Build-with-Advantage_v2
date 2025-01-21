@@ -6,17 +6,20 @@ using System.Diagnostics;
 using Unity;
 using System.Web.Optimization;
 using AdvantageAI_Web.App_Start;
+using NLog;
 
 namespace AdvantageAI_Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
         private IUnityContainer container;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         protected void Application_Start()
         {
             try
             {
-                Debug.WriteLine("Application Starting...");
+                Logger.Info("Application Starting...");
                 container = new UnityContainer();
                 UnityConfig.RegisterComponents(container);
 
@@ -25,11 +28,11 @@ namespace AdvantageAI_Web
                 RouteConfig.RegisterRoutes(RouteTable.Routes);
                 BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-                Debug.WriteLine("Application Started Successfully");
+                Logger.Info("Application Started Successfully");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Startup Error: {ex.Message}");
+                Logger.Error(ex, "Startup Error");
                 throw;
             }
         }
@@ -37,7 +40,7 @@ namespace AdvantageAI_Web
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
-            Debug.WriteLine($"Application Error: {exception?.Message}");
+            Logger.Error(exception, "Application Error");
             try
             {
                 if (HttpContext.Current?.Response != null)
@@ -49,7 +52,7 @@ namespace AdvantageAI_Web
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Failed to handle error: " + ex.Message);
+                Logger.Error(ex, "Failed to handle error");
             }
         }
 

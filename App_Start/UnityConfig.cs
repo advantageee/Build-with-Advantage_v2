@@ -1,43 +1,68 @@
-using AdvantageAI_Server.Models;
-using AdvantageAI_Server.Services;
+using AdvantageAI.Controllers;
+using AdvantageAI.Services; // Server services
+using AdvantageAI.Services.Interfaces; // Service interfaces
 using AdvantageAIWeb.Services;
-using AdvantageAIWeb.Services.Interfaces;
-using AvantageAI_Server.Controllers;
-using Microsoft.Extensions.Logging;
+using Azure.Storage.Blobs; // For BlobServiceClient
+using Microsoft.Extensions.Logging; // For logging
+using System;
 using System.Configuration;
 using System.Web.Mvc;
 using Unity;
 using Unity.AspNet.WebApi;
+using Unity.Injection;
+using Unity.Mvc5;
 
-namespace AdvantageAI_Web.App_Start
+namespace AdvantageAIWeb.App_Start
 {
     public static class UnityConfig
     {
+        private static readonly ILogger Logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger("UnityConfig");
+
         public static void RegisterComponents(IUnityContainer container)
         {
-            var translatorApiKey = ConfigurationManager.AppSettings["TranslatorApiKey"];
-            var translatorEndpoint = ConfigurationManager.AppSettings["TranslatorEndpoint"];
-            var openAIApiKey = ConfigurationManager.AppSettings["AdvantageAIKey"];
-            var openAIEndpoint = ConfigurationManager.AppSettings["AdvantageAIEndpoint"];
-            var visionApiKey = ConfigurationManager.AppSettings["VisionApiKey"];
-            var visionEndpoint = ConfigurationManager.AppSettings["VisionEndpoint"];
-            var dalleApiKey = ConfigurationManager.AppSettings["DalleApiKey"];
-            var dalleEndpoint = ConfigurationManager.AppSettings["DalleEndpointUrl"];
-            var blobConnectionString = ConfigurationManager.AppSettings["BlobStorageConnectionString"];
+            try
+            {
+                // Retrieve settings from appSettings
+                var translatorApiKey = ConfigurationManager.AppSettings["TranslatorApiKey"];
+                var translatorEndpoint = ConfigurationManager.AppSettings["TranslatorEndpoint"];
+                var openAIApiKey = ConfigurationManager.AppSettings["AdvantageAIKey"];
+                var openAIEndpoint = ConfigurationManager.AppSettings["AdvantageAIEndpoint"];
+                var visionApiKey = ConfigurationManager.AppSettings["VisionApiKey"];
+                var visionEndpoint = ConfigurationManager.AppSettings["VisionEndpoint"];
+                var dalleApiKey = ConfigurationManager.AppSettings["DalleApiKey"];
+                var dalleEndpoint = ConfigurationManager.AppSettings["DalleEndpointUrl"];
+                var blobConnectionString = ConfigurationManager.AppSettings["BlobStorageConnectionString"]
+                    ?? throw new ConfigurationErrorsException("BlobStorageConnectionString is missing in appSettings.");
 
-            IUnityContainer aiServiceContainer = container.RegisterType<IAdvantageAIService, IAdvantageAIService>();
-            container.RegisterType<ITranslatorService, TranslatorService>();
-            container.RegisterType<IOpenAIService, OpenAIService>();
-            container.RegisterType<IVisionService, VisionService>();
-            container.RegisterType<IDalleService, DalleService>();
-            container.RegisterType<ICodeGenerationService, CodeGenerationService>();
-            container.RegisterInstance(new BlobServiceClient(blobConnectionString));
+                // Register services with their respective interfaces
+                container.RegisterType<ITranslatorService, TranslatorService>(
+                    new InjectionConstructor(translatorApiKey, translatorEndpoint));
 
-            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-            container.RegisterInstance<ILoggerFactory>(loggerFactory);
-            container.RegisterType(typeof(ILogger<>), typeof(Logger<>));
+                container.RegisterType<IOpenAIService, OpenAIService>(
+                    new InjectionConstructor(openAIApiKey, openAIEndpoint));
 
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+                container.RegisterType<IVisionService, VisionService>(
+                    new InjectionConstructor(visionApiKey, visionEndpoint));
+
+                container.RegisterType<IDalleService, DalleService>(
+                new InjectionConstructor(dalleApiKey, dalleEndpoint));
+
+                container.RegisterType<ICodeGenerationService, CodeGenerationService>();
+
+                // Register Blob Storage Client as a singleton instance
+                var blobServiceClient = new BlobServiceClient(blobConnectionString);
+                container.RegisterInstance(blobServiceClient);
+
+                // Set Dependency Resolver
+                DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+
+                Logger.LogInformation("Unity container configured successfully.");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("Critical error during Unity container registration: {Error}", ex.Message);
+                throw;
+            }
         }
     }
 }
