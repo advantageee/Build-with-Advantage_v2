@@ -145,6 +145,11 @@ namespace AdvantageAIWeb.Services
             throw new NotImplementedException();
         }
 
+        public Task<string> TranslateAsync(string content, string targetLanguage)
+        {
+            throw new NotImplementedException();
+        }
+
         private class TranslationResponse
         {
             public Translation[] Translations { get; set; }
