@@ -9,6 +9,7 @@ namespace AdvantageAIWeb.Services.Interfaces
         Task<ContentGenerationResult> GenerateContentAsync(object prompt);  // Changed
         Task<string> GenerateImageCaptionAsync(Stream stream);  // Changed
         Task<string> GenerateImageCaptionAsync(object stream);  // Changed
+        Task ProcessDocumentAsync(string filePath);
         Task<TranslationResult> TranslateContentAsync(string content, string targetLanguage);  // Changed
         Task<DocumentTranslationResult> TranslateDocumentAsync(Stream stream, string targetLanguage);  // Changed
     }
