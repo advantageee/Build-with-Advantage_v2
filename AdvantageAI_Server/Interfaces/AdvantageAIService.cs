@@ -137,6 +137,11 @@ namespace AdvantageAI_Web.App_Start
             }
         }
 
+        Task IAdvantageAIService.ProcessDocumentAsync(object filePath)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task ProcessDocumentInternalAsync(string filePath)
         {
             // Implement internal document processing logic
