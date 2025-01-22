@@ -22,5 +22,9 @@ namespace AdvantageAI_Web
         {
             UnityConfig.Container.Dispose();
         }
+
+        public interface IUnityContainer
+        {
+        }
     }
 }
