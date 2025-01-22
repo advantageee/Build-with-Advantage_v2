@@ -1,7 +1,9 @@
 using AdvantageAI_Server.Models;
 using AdvantageAI_Server.Services;
+using AdvantageAI_Web.App_Start;
 using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
+using AvantageAI_Server.Controllers;
 using Microsoft.Extensions.Logging;
 using System.Web.Mvc;
 using Unity;
@@ -46,7 +48,7 @@ namespace AdvantageAI_Web
             container.RegisterType<BlobServiceClient>();
 
             // Register NLog logger
-            container.RegisterInstance<ILogger>(LogManager.GetCurrentClassLogger());
+            container.RegisterInstance<ILogger>((ILogger)LogManager.GetCurrentClassLogger());
         }
     }
 }
