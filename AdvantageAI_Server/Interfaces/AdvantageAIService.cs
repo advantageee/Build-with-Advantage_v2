@@ -85,28 +85,6 @@ namespace AdvantageAI_Web.App_Start
             }
         }
 
-        public async Task ProcessDocumentAsync(object filePath)
-        {
-            try
-            {
-                _logger.LogInformation("Processing document object");
-                // Implement alternative document processing logic
-                if (filePath is string path)
-                {
-                    await ProcessDocumentAsync(path);
-                }
-                else
-                {
-                    throw new ArgumentException("Invalid file path type", nameof(filePath));
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error processing document object");
-                throw;
-            }
-        }
-
         public async Task<TranslationResult> TranslateContentAsync(string content, string targetLanguage)
         {
             try

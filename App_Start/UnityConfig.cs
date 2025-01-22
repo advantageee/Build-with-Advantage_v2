@@ -1,6 +1,5 @@
 using AdvantageAI_Server.Models;
 using AdvantageAI_Server.Services;
-using AdvantageAI_Web.App_Start;
 using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -33,6 +32,21 @@ namespace AdvantageAI_Web
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
             Container = container;
+        }
+
+        public static void RegisterTypes(IUnityContainer container)
+        {
+            // Register all required services and dependencies
+            container.RegisterType<IAdvantageAIService, AdvantageAIService>();
+            container.RegisterType<ITranslatorService, TranslatorService>();
+            container.RegisterType<IOpenAIService, OpenAIService>();
+            container.RegisterType<IVisionService, VisionService>();
+            container.RegisterType<IDalleService, DalleService>();
+            container.RegisterType<ICodeGenerationService, CodeGenerationService>();
+            container.RegisterType<BlobServiceClient>();
+
+            // Register NLog logger
+            container.RegisterInstance<ILogger>(LogManager.GetCurrentClassLogger());
         }
     }
 }
