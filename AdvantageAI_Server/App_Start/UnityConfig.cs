@@ -43,5 +43,10 @@ namespace AdvantageAI_Server
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
         }
+
+        internal static void RegisterComponents(IUnityContainer container)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
