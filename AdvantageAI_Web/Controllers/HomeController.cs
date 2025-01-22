@@ -103,8 +103,8 @@ namespace AdvantageAI_Web.Controllers
             try
             {
                 // Correct async call for translation
-                await _aiService.ProcessDocumentAsync(_filePath);
-                return Json(new { success = true, message = "Document processed successfully" });
+                var translationResult = await _aiService.TranslateContentAsync(content, targetLanguage);
+                return Json(new { success = true, translatedContent = translationResult.TranslatedContent });
             }
             catch (Exception ex)
             {

@@ -23,9 +23,10 @@ namespace AdvantageAI_Server
         /// </summary>
         public static IUnityContainer Container => container.Value;
 
-        public static void RegisterComponents(AdvantageAI_Web.UnityWebApiActivator.IUnityContainer container)
+        public static void RegisterComponents(IUnityContainer container)
         {
-            throw new NotImplementedException();
+            // Correct interface usage
+            UnityConfig.RegisterComponents(container);
         }
         #endregion
 
