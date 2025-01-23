@@ -123,7 +123,7 @@ namespace AdvantageAI_Web.App_Start
 
                 // Process and translate the document
                 // This is a placeholder - implement actual translation logic
-                Response<BlobContentInfo> response = await blobClient.UploadAsync(stream);
+                Azure.Response<Azure.Storage.Blobs.Models.BlobContentInfo> response = await blobClient.UploadAsync(stream);
 
                 return new DocumentTranslationResult
                 {
