@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
@@ -72,6 +71,12 @@ namespace AdvantageAIWeb.ViewModels
         internal void PopulateLanguages(object value)
         {
             throw new NotImplementedException();
+        }
+
+        public class SelectListItem
+        {
+            public string Value { get; internal set; }
+            public string Text { get; internal set; }
         }
     }
 }

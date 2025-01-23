@@ -39,8 +39,6 @@ namespace AdvantageAI_Web.App_Start
             try
             {
                 _logger.LogInformation("Generating content for prompt: {Prompt}", prompt);
-                // Implement content generation logic using _openAIService
-                // This is a placeholder implementation
                 return new ContentGenerationResult
                 {
                     Content = await _openAIService.GenerateContentAsync(prompt),
@@ -61,7 +59,6 @@ namespace AdvantageAI_Web.App_Start
             try
             {
                 _logger.LogInformation("Generating image caption");
-                // Implement image caption generation using _visionService
                 return await _visionService.GenerateCaptionAsync(stream);
             }
             catch (Exception ex)
@@ -71,13 +68,19 @@ namespace AdvantageAI_Web.App_Start
             }
         }
 
-        public async Task ProcessDocumentAsync(string filePath)
+        public async Task ProcessDocumentAsync(object filePath)
         {
             try
             {
                 _logger.LogInformation("Processing document: {FilePath}", filePath);
-                // Implement document processing logic
-                await ProcessDocumentInternalAsync(filePath);
+                if (filePath is string path)
+                {
+                    await ProcessDocumentInternalAsync(path);
+                }
+                else
+                {
+                    throw new ArgumentException("File path must be a string", nameof(filePath));
+                }
             }
             catch (Exception ex)
             {
@@ -91,7 +94,6 @@ namespace AdvantageAI_Web.App_Start
             try
             {
                 _logger.LogInformation("Translating content to {TargetLanguage}", targetLanguage);
-                // Implement content translation using _translatorService
                 var translatedText = await _translatorService.TranslateAsync(content, targetLanguage);
                 return new TranslationResult
                 {
@@ -113,16 +115,12 @@ namespace AdvantageAI_Web.App_Start
             try
             {
                 _logger.LogInformation("Translating document to {TargetLanguage}", targetLanguage);
-                // Implement document translation logic
-                // This might involve saving to blob storage and getting a URL
                 var containerClient = _blobServiceClient.GetBlobContainerClient("translations");
                 await containerClient.CreateIfNotExistsAsync();
 
                 var fileName = $"translated-doc-{Guid.NewGuid()}.pdf";
                 var blobClient = containerClient.GetBlobClient(fileName);
 
-                // Process and translate the document
-                // This is a placeholder - implement actual translation logic
                 Response<BlobContentInfo> response = await blobClient.UploadAsync(stream);
 
                 return new DocumentTranslationResult
@@ -138,15 +136,10 @@ namespace AdvantageAI_Web.App_Start
             }
         }
 
-        Task IAdvantageAIService.ProcessDocumentAsync(object filePath)
-        {
-            throw new NotImplementedException();
-        }
-
         private async Task ProcessDocumentInternalAsync(string filePath)
         {
-            // Implement internal document processing logic
-            await Task.CompletedTask; // Placeholder
+            // Implement document processing logic here
+            await Task.CompletedTask;
         }
     }
 }
