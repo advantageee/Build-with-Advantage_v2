@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Azure.AI.OpenAI;
+
 
 namespace AdvantageAIWeb.Models.AI
 {
@@ -44,6 +44,12 @@ namespace AdvantageAIWeb.Models.AI
         public override string ToString()
         {
             return $"ChatCompletionRequest: {Messages.Count} message(s)";
+        }
+
+        public class ChatMessage
+        {
+            public string Content { get; internal set; }
+            public object Role { get; internal set; }
         }
     }
 }

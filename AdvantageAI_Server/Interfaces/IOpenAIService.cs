@@ -38,5 +38,6 @@ namespace AdvantageAIWeb.Services.Interfaces
         /// <param name="deploymentId">The deployment ID to use for the request.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the AI response.</returns>
         Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory, string deploymentId);
+        Task<AIResponse> GetChatCompletionAsync(List<AdvantageAIWeb.Models.AI.ChatCompletionResult.ChatMessage> conversationHistory, string deploymentId);
     }
 }
