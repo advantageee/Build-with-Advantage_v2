@@ -1,7 +1,6 @@
 using System;
 
 using Unity;
-using static AdvantageAI_Web.UnityWebApiActivator;
 
 namespace AdvantageAI_Server
 {
