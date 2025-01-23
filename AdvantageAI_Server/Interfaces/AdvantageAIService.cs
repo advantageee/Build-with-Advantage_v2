@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Azure.Storage.Blobs;
 
 namespace AdvantageAI_Web.App_Start
 {
@@ -36,20 +37,6 @@ namespace AdvantageAI_Web.App_Start
         public Task<DocumentTranslationResult> TranslateDocumentAsync(Stream stream, string targetLanguage)
         {
             throw new NotImplementedException();
-        }
-        public class BlobServiceClient
-        {
-            private string connectionString;
-
-            public BlobServiceClient(string connectionString)
-            {
-                this.connectionString = connectionString;
-            }
-
-            public object GetBlobContainerClient(string containerName)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Azure;
+using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +13,7 @@ namespace AdvantageAI_Web.Controllers
 {
     public class BlobServiceClientWrapper
     {
-        private readonly Azure.Storage.Blobs.BlobServiceClient _blobServiceClient;
+        private readonly BlobServiceClient _blobServiceClient;
         private readonly ILogger<BlobServiceClientWrapper> _logger;
         private readonly string _containerName = "advantageai-uploads";
 
@@ -25,7 +25,7 @@ namespace AdvantageAI_Web.Controllers
                 throw new ArgumentNullException(nameof(connectionString), "Azure Storage connection string not found in configuration");
             }
 
-            _blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(connectionString);
+            _blobServiceClient = new BlobServiceClient(connectionString);
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
