@@ -89,6 +89,20 @@ namespace AdvantageAI_Web.App_Start
             }
         }
 
+        public async Task ProcessDocumentAsync(string filePath)
+        {
+            try
+            {
+                _logger.LogInformation("Processing document: {FilePath}", filePath);
+                await ProcessDocumentInternalAsync(filePath);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing document: {FilePath}", filePath);
+                throw;
+            }
+        }
+
         public async Task<TranslationResult> TranslateContentAsync(string content, string targetLanguage)
         {
             try
