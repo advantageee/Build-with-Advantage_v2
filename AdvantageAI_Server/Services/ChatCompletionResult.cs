@@ -9,12 +9,10 @@ namespace AdvantageAIWeb.Models.AI
     /// </summary>
     public class ChatCompletionResult
     {
-        private readonly List<ChatMessage> _messages = new List<ChatMessage>();
-
         /// <summary>
         /// Gets the list of messages in the conversation.
         /// </summary>
-        public List<ChatMessage> Messages => _messages;
+        public List<ChatMessage> Messages { get; } = new List<ChatMessage>();
 
         /// <summary>
         /// Adds a message to the conversation history.
@@ -28,7 +26,7 @@ namespace AdvantageAIWeb.Models.AI
                 throw new ArgumentNullException(nameof(message), "Message cannot be null.");
             }
 
-            _messages.Add(message);
+            Messages.Add(message);
         }
 
         /// <summary>
@@ -37,7 +35,7 @@ namespace AdvantageAIWeb.Models.AI
         /// <exception cref="InvalidOperationException">Thrown if the request does not contain any messages.</exception>
         public void ValidateRequest()
         {
-            if (_messages == null || _messages.Count == 0)
+            if (Messages == null || Messages.Count == 0)
             {
                 throw new InvalidOperationException("ChatCompletionRequest must contain at least one message.");
             }
@@ -45,7 +43,7 @@ namespace AdvantageAIWeb.Models.AI
 
         public override string ToString()
         {
-            return $"ChatCompletionRequest: {_messages.Count} message(s)";
+            return $"ChatCompletionRequest: {Messages.Count} message(s)";
         }
     }
 }
