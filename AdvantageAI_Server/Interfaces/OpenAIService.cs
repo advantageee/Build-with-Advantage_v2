@@ -6,9 +6,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
-using Azure.AI.OpenAI;
 using NLog;
-using RestSharp;
+
+using static AdvantageAIWeb.Models.AI.ChatCompletionResult;
 
 namespace AdvantageAI_Server.Services
 {
@@ -104,7 +104,7 @@ namespace AdvantageAI_Server.Services
             }
         }
 
-        private async Task<string> SendPostRequestAsync(string path, object requestBody)
+        public async Task<string> SendPostRequestAsync(string path, object requestBody)
         {
             var json = JsonSerializer.Serialize(requestBody);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -131,7 +131,10 @@ namespace AdvantageAI_Server.Services
             }
         }
 
-        public string GenerateCodeSnippet(string prompt) => GenerateChatResponseAsync($"Generate code snippet: {prompt}").GetAwaiter().GetResult();
+        public string GenerateCodeSnippet(string prompt)
+        {
+            return GenerateChatResponseAsync($"Generate code snippet: {prompt}").GetAwaiter().GetResult();
+        }
 
         public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory, string deploymentId)
         {
@@ -145,7 +148,7 @@ namespace AdvantageAI_Server.Services
 
             try
             {
-                var response = await SendPostRequestAsync("/chat/completions", requestBody);
+                var response = await SendPostRequestAsync($"/chat/completions?deploymentId={deploymentId}", requestBody);
                 var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
                 return new AIResponse { Content = result?.Messages?[0]?.Content };
             }
@@ -216,12 +219,35 @@ namespace AdvantageAI_Server.Services
 
         public AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId)
         {
-            throw new NotImplementedException();
+            if (conversationHistory == null || conversationHistory.Count == 0)
+            {
+                throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
+            }
+
+            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
+            var requestBody = new { messages };
+
+            try
+            {
+                var response = SendPostRequestAsync($"/chat/completions?deploymentId={deploymentId}", requestBody).GetAwaiter().GetResult();
+                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
+                return new AIResponse { Content = result?.Messages?[0]?.Content };
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error getting chat completion");
+                throw new InvalidOperationException("Failed to get chat completion.", ex);
+            }
         }
 
         public Task<string> GenerateCodeSnippetAsync(string prompt)
         {
             throw new NotImplementedException();
+        }
+                  
+        Task<AIResponse> IOpenAIService.GetChatCompletionAsync(List<ChatMessage> conversationHistory)
+        {
+            return GetChatCompletionAsync(conversationHistory);
         }
     }
 
