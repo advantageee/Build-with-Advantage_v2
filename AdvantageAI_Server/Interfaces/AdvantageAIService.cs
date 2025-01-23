@@ -3,9 +3,8 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
 using Azure;
+using Microsoft.Azure.Cosmos;
 
 namespace AdvantageAI_Web.App_Start
 {
@@ -89,18 +88,9 @@ namespace AdvantageAI_Web.App_Start
             }
         }
 
-        public async Task ProcessDocumentAsync(string filePath)
+        public Task ProcessDocumentAsync(string filePath)
         {
-            try
-            {
-                _logger.LogInformation("Processing document: {FilePath}", filePath);
-                await ProcessDocumentInternalAsync(filePath);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error processing document: {FilePath}", filePath);
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public async Task<TranslationResult> TranslateContentAsync(string content, string targetLanguage)
@@ -155,5 +145,17 @@ namespace AdvantageAI_Web.App_Start
             // Implement document processing logic here
             await Task.CompletedTask;
         }
+    }
+
+    public class BlobServiceClient
+    {
+        internal object GetBlobContainerClient(string v)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    internal class BlobContentInfo
+    {
     }
 }
