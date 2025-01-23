@@ -107,12 +107,6 @@ namespace AdvantageAI_Web.App_Start
                     Keywords = "translated,keywords"
                 };
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error translating content to {TargetLanguage}", targetLanguage);
-                throw;
-            }
-        }
 
         public async Task<DocumentTranslationResult> TranslateDocumentAsync(Stream stream, string targetLanguage)
         {
@@ -146,7 +140,6 @@ namespace AdvantageAI_Web.App_Start
             await Task.CompletedTask;
         }
     }
-
     public class BlobServiceClient
     {
         internal object GetBlobContainerClient(string v)
