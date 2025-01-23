@@ -2,7 +2,6 @@
 using AdvantageAIWeb.Models.AI;
 using AdvantageAIWeb.Models.Chat;
 using AdvantageAIWeb.ViewModels;
-using Azure.AI.OpenAI;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,7 +28,7 @@ namespace AdvantageAIWeb.Services.Interfaces
         Task<string> GenerateCodeSnippetAsync(string prompt, string language);
         Task<string> GenerateCodeSnippetAsync(string prompt);
         Task<string> GenerateContentAsync(string prompt);
-        AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId);
+        AIResponse GetChatCompletion(List<AdvantageAIWeb.Models.AI.ChatCompletionResult.ChatMessage> conversationHistory, string deploymentId);
 
         /// <summary>
         /// Gets a chat completion based on the provided conversation history and deployment ID.
@@ -37,7 +36,6 @@ namespace AdvantageAIWeb.Services.Interfaces
         /// <param name="conversationHistory">The conversation history to base the response on.</param>
         /// <param name="deploymentId">The deployment ID to use for the request.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the AI response.</returns>
-        Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory, string deploymentId);
         Task<AIResponse> GetChatCompletionAsync(List<AdvantageAIWeb.Models.AI.ChatCompletionResult.ChatMessage> conversationHistory, string deploymentId);
-    }
+         }
 }
