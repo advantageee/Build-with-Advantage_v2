@@ -31,5 +31,9 @@ namespace AdvantageAI_Server
         {
             UnityConfig.Container.Dispose();
         }
+
+        public interface IUnityContainer
+        {
+        }
     }
 }

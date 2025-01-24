@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
-using System.Memory.Data;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
+using System.Memory.Data;
+using static Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.Controllers
 {
