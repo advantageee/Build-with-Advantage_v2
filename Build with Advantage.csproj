@@ -373,7 +373,6 @@
     <Compile Include="AdvantageAI_Web\Model\ViewModels\HomeViewModel.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
-    <Compile Include="Azure\Storage.cs" />
     <Compile Include="NLog\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unity\WebApi.cs" />

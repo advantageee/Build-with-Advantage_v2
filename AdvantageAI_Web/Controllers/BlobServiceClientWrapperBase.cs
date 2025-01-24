@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
 using Microsoft.Azure.Storage.Blob;
 using Azure.Storage.Blobs.Models;
-using static Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.Controllers
 {
@@ -23,7 +22,7 @@ namespace AdvantageAI_Web.Controllers
             _logger = logger;
         }
 
-        public async Task<BlobProperties> GetFilePropertiesAsync(string fileName)
+        public async Task<Azure.Storage.Blobs.Models.BlobProperties> GetFilePropertiesAsync(string fileName)
         {
             try
             {
@@ -50,7 +49,6 @@ namespace AdvantageAI_Web.Controllers
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
                 await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
                 var blobClient = containerClient.GetBlobClient(fileName);
-                await blobClient.UploadAsync(fileStream, overwrite: true);
                 return blobClient.Uri.ToString();
             }
             catch (Exception ex)

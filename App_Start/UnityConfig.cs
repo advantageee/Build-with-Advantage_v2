@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;
+using static AdvantageAI_Web.App_Start.AdvantageAIService;
 
 namespace AdvantageAI_Web
 {

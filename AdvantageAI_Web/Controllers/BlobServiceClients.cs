@@ -5,6 +5,9 @@ using System.IO;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using static AdvantageAI_Web.App_Start.AdvantageAIService;
+using NLog;
+using BlobServiceClient = AdvantageAI_Web.App_Start.AdvantageAIService.BlobServiceClient;
 
 namespace AdvantageAI_Web.Controllers
 {
@@ -54,6 +57,9 @@ namespace AdvantageAI_Web.Controllers
 
     public class BlobServiceClientWrapper : BlobServiceClientWrapperBase1
     {
+        private readonly App_Start.AdvantageAIService.BlobServiceClient _blobServiceClient;
+        private readonly ILogger<BlobServiceClientWrapper> _logger;
+
         public BlobServiceClientWrapper(IConfiguration configuration, ILogger<BlobServiceClientWrapper> logger)
         {
             var connectionString = configuration.GetConnectionString("AzureStorage");
@@ -62,5 +68,7 @@ namespace AdvantageAI_Web.Controllers
             _blobServiceClient = new BlobServiceClient(connectionString);
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
+        public ILogger<BlobServiceClientWrapper> Logger { get; }
     }
 }
