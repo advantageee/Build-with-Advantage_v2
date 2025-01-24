@@ -9,8 +9,15 @@ namespace Unity
     {
         internal class UnityDependencyResolver : IDependencyResolver
         {
+            private IUnityContainer container;
+
             public UnityDependencyResolver(UnityWebApiActivator.IUnityContainer container)
             {
+            }
+
+            public UnityDependencyResolver(IUnityContainer container)
+            {
+                this.container = container;
             }
 
             public IDependencyScope BeginScope()

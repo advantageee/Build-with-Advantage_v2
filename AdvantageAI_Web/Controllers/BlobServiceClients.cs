@@ -1,19 +1,18 @@
-﻿using Azure;
-using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Azure.Storage.Blob;
+using Azure.Storage.Blobs.Models;
+using static AdvantageAI_Web.App_Start.AdvantageAIService;
 
 namespace AdvantageAI_Web.Controllers
 {
     public class BlobServiceClientWrapper
     {
-        private readonly Azure.Storage.Blobs.BlobServiceClient _blobServiceClient;
+        private readonly BlobServiceClient _blobServiceClient;
         private readonly ILogger<BlobServiceClientWrapper> _logger;
         private readonly string _containerName = "advantageai-uploads";
 
@@ -25,7 +24,7 @@ namespace AdvantageAI_Web.Controllers
                 throw new ArgumentNullException(nameof(connectionString), "Azure Storage connection string not found in configuration");
             }
 
-            _blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(connectionString);
+            _blobServiceClient = new BlobServiceClient(connectionString);
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -37,7 +36,7 @@ namespace AdvantageAI_Web.Controllers
                 await containerClient.CreateIfNotExistsAsync();
 
                 var blobClient = containerClient.GetBlobClient(fileName);
-                await blobClient.UploadAsync(fileStream, new BlobUploadOptions { Overwrite = true });
+                await blobClient.UploadAsync(fileStream, new Azure.Storage.Blobs.Models.BlobUploadOptions { Overwrite = true });
 
                 return blobClient.Uri.ToString();
             }
@@ -152,7 +151,7 @@ namespace AdvantageAI_Web.Controllers
         private async Task EnsureContainerExistsAsync()
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
-            BlobContainerClient value = await containerClient.CreateIfNotExistsAsync();
+            await containerClient.CreateIfNotExistsAsync();
         }
     }
 }

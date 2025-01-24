@@ -25,6 +25,14 @@ namespace Azure
                     throw new NotImplementedException();
                 }
             }
+
+            internal class Models
+            {
+                internal class BlobUploadOptions
+                {
+                    public bool Overwrite { get; set; }
+                }
+            }
         }
     }
 }
