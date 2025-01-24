@@ -3,8 +3,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using static Azure.Storage.Blobs;
-using static Azure.Storage.Blobs.Models;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.Controllers
 {
