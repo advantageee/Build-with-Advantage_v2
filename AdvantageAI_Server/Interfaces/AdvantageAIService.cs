@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.App_Start
 {
@@ -46,9 +48,21 @@ namespace AdvantageAI_Web.App_Start
                 this.connectionString = connectionString;
             }
 
-            public object GetBlobContainerClient(string containerName)
+            public BlobContainerClient GetBlobContainerClient(string containerName)
             {
                 throw new NotImplementedException();
+            }
+
+            public async Task CreateIfNotExistsAsync()
+            {
+                // Implement the method to create the container if it does not exist
+                await Task.CompletedTask; // Placeholder
+            }
+
+            public BlobClient GetBlobClient(string blobName)
+            {
+                // Implement the method to get a blob client
+                return new BlobClient(); // Placeholder
             }
         }
     }
