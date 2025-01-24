@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Microsoft.Azure.Storage.Blob;
+using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
 
@@ -36,7 +36,7 @@ namespace AdvantageAI_Web.Controllers
                 await containerClient.CreateIfNotExistsAsync();
 
                 var blobClient = containerClient.GetBlobClient(fileName);
-                await blobClient.UploadAsync(fileStream, new Azure.Storage.Blobs.Models.BlobUploadOptions { Overwrite = true });
+                await blobClient.UploadAsync(fileStream, new BlobUploadOptions { Overwrite = true });
 
                 return blobClient.Uri.ToString();
             }
