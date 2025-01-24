@@ -62,7 +62,7 @@ namespace AdvantageAI_Web.App_Start
             public BlobClient GetBlobClient(string blobName)
             {
                 // Implement the method to get a blob client
-                return new BlobClient(); // Placeholder
+                return new BlobClient(connectionString, "containerName", blobName); // Placeholder
             }
         }
     }
