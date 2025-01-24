@@ -3,7 +3,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Azure.Storage.Blobs;
+using Azure.Storage.Storage;
+using Azure.Storage.Storage.Models;
+using Azure.Storage;
 using Azure.Core;
 
 namespace AdvantageAI_Web.App_Start
