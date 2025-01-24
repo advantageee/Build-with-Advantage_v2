@@ -152,7 +152,7 @@ namespace AdvantageAI_Web.Controllers
         private async Task EnsureContainerExistsAsync()
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
-            object value = await containerClient.CreateIfNotExistsAsync();
+            BlobContainerClient value = await containerClient.CreateIfNotExistsAsync();
         }
     }
 }
