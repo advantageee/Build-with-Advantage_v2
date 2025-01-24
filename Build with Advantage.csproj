@@ -18,14 +18,13 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort>44367</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,446 +45,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac, Version=8.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>packages\Autofac.8.2.0\lib\netstandard2.0\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Azure.AI.OpenAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.AI.OpenAI.1.0.0-beta.5\lib\netstandard2.0\Azure.AI.OpenAI.dll</HintPath>
-    </Reference>
-    <Reference Include="Azure.AI.Translation.Document, Version=2.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.AI.Translation.Document.2.0.0\lib\netstandard2.0\Azure.AI.Translation.Document.dll</HintPath>
-    </Reference>
-    <Reference Include="Azure.AI.Translation.Text, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.AI.Translation.Text.1.0.0\lib\netstandard2.0\Azure.AI.Translation.Text.dll</HintPath>
-    </Reference>
-    <Reference Include="Azure.Core, Version=1.44.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.Core.1.44.1\lib\net472\Azure.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Azure.Storage.Blobs, Version=12.20.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.Storage.Blobs.12.20.0\lib\netstandard2.0\Azure.Storage.Blobs.dll</HintPath>
-    </Reference>
-    <Reference Include="Azure.Storage.Common, Version=12.22.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.Storage.Common.12.22.0\lib\netstandard2.0\Azure.Storage.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Cosmos.Client, Version=3.46.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Azure.Cosmos.3.46.1\lib\netstandard2.0\Microsoft.Azure.Cosmos.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Cosmos.Core, Version=2.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Azure.Cosmos.3.46.1\lib\netstandard2.0\Microsoft.Azure.Cosmos.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Cosmos.Direct, Version=3.37.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Azure.Cosmos.3.46.1\lib\netstandard2.0\Microsoft.Azure.Cosmos.Direct.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Cosmos.Serialization.HybridRow, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Azure.Cosmos.3.46.1\lib\netstandard2.0\Microsoft.Azure.Cosmos.Serialization.HybridRow.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Storage.Blob, Version=11.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Azure.Storage.Blob.11.2.3\lib\net452\Microsoft.Azure.Storage.Blob.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Azure.Storage.Common, Version=11.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Azure.Storage.Common.11.2.3\lib\net452\Microsoft.Azure.Storage.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.HashCode.1.1.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Build" />
-    <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Extensions.Configuration, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Configuration.9.0.1\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.9.0.1\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Configuration.Binder.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.DependencyInjection.9.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Logging.9.0.1\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.9.0.1\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Configuration, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Logging.Configuration.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Console, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Logging.Console.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Console.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Options.9.0.1\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Options.ConfigurationExtensions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Primitives.9.0.1\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Identity.Client, Version=4.67.2.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Identity.Client.4.67.2\lib\net472\Microsoft.Identity.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Abstractions.6.35.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.Bson.1.0.3\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Buffers.4.6.0\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ClientModel, Version=1.2.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\System.ClientModel.1.2.1\lib\netstandard2.0\System.ClientModel.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Collections.Immutable.1.7.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Configuration.ConfigurationManager.6.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Diagnostics.DiagnosticSource.9.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO.Hashing, Version=6.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.Hashing.6.0.2\lib\net461\System.IO.Hashing.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IO.Pipelines, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.IO.Pipelines.9.0.1\lib\net462\System.IO.Pipelines.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Memory.4.6.0\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <PackageReference Include="System.Memory.Data" Version="9.0.1" />, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Memory.Data.9.0.1\lib\net462\System.Memory.Data.dll</HintPath>
-      <Private>True</Private>
-     <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Security.Permissions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encodings.Web.9.0.1\lib\net462\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Json.9.0.1\lib\net462\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
-      <Private>True</Private>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Threading.Tasks.Extensions.4.6.0\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Helpers, Version=3.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.3.0\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.3.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.Mvc" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Net.Http.WebRequest">
-    </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>packages\Unity.5.11.1\lib\net47\Unity.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.9.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>packages\Unity.Container.5.11.8\lib\net48\Unity.Container.dll</HintPath>
+    <Reference Include="System.IO.Hashing">
+      <HintPath>packages\System.IO.Hashing.6.0.2\lib\net461\System.IO.Hashing.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
-      <HintPath>packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
-    </Reference>
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvantageAI_Web\App_Start\BundleConfig.cs" />
-    <Compile Include="AdvantageAI_Web\App_Start\FilterConfig.cs" />
-    <Compile Include="AdvantageAI_Web\App_Start\RouteConfig.cs" />
-    <Compile Include="AdvantageAI_Web\App_Start\WebApiConfig.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\BlobServiceClients.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\BlobServiceClientWrapperBase.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\ChatCompletionsOptions.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\DalleService.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\ErrorController.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\HomeController.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\ImageCaptionRequest.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\LogManager.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\RetrievalService.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\TranslatorService.cs" />
-    <Compile Include="AdvantageAI_Web\Controllers\VisionService.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\ErrorController.cs" />
     <Compile Include="AdvantageAI_Web\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="AdvantageAI_Web\Model\AI\ImagePromptRequest.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\AI\AIModel.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\AI\AIResponse.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\AI\TranslatorOptions.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\ChatMessage.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\ChatRequest.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\ChatViewModel.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\GenerateCodeRequest.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\ServiceResponse.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\StreamedChatResponse.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Chat\TranslateRequest.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Image\ImageCaption.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Image\ImagePromptViewModel.cs" />
-    <Compile Include="AdvantageAI_Web\Model\Image\ImageViewModel.cs" />
     <Compile Include="AdvantageAI_Web\Model\ViewModels\HomeViewModel.cs" />
-    <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="App_Start\UnityWebApiActivator.cs" />
-    <Compile Include="NLog\Logger.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unity\WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.min.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.rtl.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.min.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.rtl.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.min.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.rtl.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.min.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.rtl.css" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.rtl.min.css" />
     <Content Include="AdvantageAI_Web\Content\Site.css" />
     <Content Include="AdvantageAI_Web\favicon.ico" />
-    <Content Include="AdvantageAI_Web\Global.asax" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.bundle.js" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.bundle.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.esm.js" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.esm.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.js" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\copyToClipboard.js" />
-    <None Include="AdvantageAI_Web\Scripts\jquery-3.6.0.intellisense.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.slim.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.slim.min.js" />
-    <None Include="AdvantageAI_Web\Scripts\jquery-3.7.0.intellisense.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.0.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.0.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.0.slim.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.0.slim.min.js" />
-    <None Include="AdvantageAI_Web\Scripts\jquery-3.7.1-vsdoc.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.1.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.1.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.1.slim.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.1.slim.min.js" />
-    <None Include="AdvantageAI_Web\Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery.validate.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery.validate.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="AdvantageAI_Web\Scripts\modernizr-2.8.3.js" />
-    <Content Include="AdvantageAI_Web\Scripts\Prompt.js" />
-    <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
-    <Content Include="obj\Debug\Build with Advantage.csproj.FileListAbsolute.txt" />
-    <Content Include="web.config" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="packages.config" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AdvantageAI_Web\App_Data\Uploads\" />
-    <Folder Include="bin\" />
-    <Folder Include="obj\Debug\TempPE\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.min.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.min.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.min.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.min.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.rtl.css.map" />
-    <Content Include="AdvantageAI_Web\Content\bootstrap.rtl.min.css.map" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.bundle.js.map" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.esm.js.map" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.esm.min.js.map" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.js.map" />
-    <Content Include="AdvantageAI_Web\Scripts\bootstrap.min.js.map" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.min.map" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.slim.min.map" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.0.min.map" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.0.slim.min.map" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.1.min.map" />
-    <Content Include="AdvantageAI_Web\Scripts\jquery-3.7.1.slim.min.map" />
-    <Content Include="AdvantageAI_Web\Views\Home\Chat.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\Contact.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\GenerateCodeSnippet.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\GenerateImage.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\GenerateImageCaption.cshtml" />
     <Content Include="AdvantageAI_Web\Views\Home\Index.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\shared\Error.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\shared\_LanguageOptions.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\shared\_Layout.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Home\UploadDocument.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Shared\Error.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Shared\_LanguageOptions.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Shared\_Layout.cshtml" />
-    <Content Include="AdvantageAI_Web\Views\Web.config" />
-    <Content Include="AdvantageAI_Web\Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="AdvantageAI_Server\AdvantageAI_Server.csproj">
@@ -493,15 +78,13 @@
       <Name>AdvantageAI_Server</Name>
     </ProjectReference>
   </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v17.0\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing. Use NuGet Package Restore to download them.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$(ErrorText)" />
   </Target>
   <ProjectExtensions>
     <VisualStudio>
@@ -509,9 +92,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>64118</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44367/</IISUrl>
+          <IISUrl>http://localhost:61458/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -521,19 +104,4 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('packages\Microsoft.Azure.Cosmos.3.46.1\build\netstandard2.0\Microsoft.Azure.Cosmos.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Azure.Cosmos.3.46.1\build\netstandard2.0\Microsoft.Azure.Cosmos.targets'))" />
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
-  <Import Project="packages\Microsoft.Azure.Cosmos.3.46.1\build\netstandard2.0\Microsoft.Azure.Cosmos.targets" Condition="Exists('packages\Microsoft.Azure.Cosmos.3.46.1\build\netstandard2.0\Microsoft.Azure.Cosmos.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target> -->
 </Project>
