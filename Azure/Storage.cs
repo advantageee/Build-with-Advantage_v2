@@ -32,6 +32,11 @@ namespace Azure
                 {
                 }
 
+                public class PublicAccessType
+                {
+                    public PublicAccessType Blob { get; internal set; }
+                }
+
                 internal class BlobUploadOptions
                 {
                     public bool Overwrite { get; set; }

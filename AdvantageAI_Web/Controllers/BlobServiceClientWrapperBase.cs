@@ -4,6 +4,8 @@ using System.IO;
 using System.Threading.Tasks;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
 using Microsoft.Azure.Storage.Blob;
+using Azure.Storage.Blobs.Models;
+using static Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.Controllers
 {
@@ -11,9 +13,15 @@ namespace AdvantageAI_Web.Controllers
     {
         private readonly BlobServiceClient _blobServiceClient;
         private readonly string _containerName = "advantageai-uploads";
-        private readonly ILogger<BlobServiceClientWrapper> _logger;
+        private readonly ILogger<BlobServiceClientWrapperBase> _logger;
 
-        public object PublicAccessType { get; private set; }
+        internal PublicAccessType PublicAccessType { get; private set; }
+
+        public BlobServiceClientWrapperBase(BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapperBase> logger)
+        {
+            _blobServiceClient = blobServiceClient;
+            _logger = logger;
+        }
 
         public async Task<BlobProperties> GetFilePropertiesAsync(string fileName)
         {
