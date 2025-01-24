@@ -404,7 +404,6 @@
     <Content Include="AdvantageAI_Web\Scripts\bootstrap.js" />
     <Content Include="AdvantageAI_Web\Scripts\bootstrap.min.js" />
     <Content Include="AdvantageAI_Web\Scripts\copyToClipboard.js" />
-    <None Include="AdvantageAI_Web\packages.config" />
     <None Include="AdvantageAI_Web\Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.js" />
     <Content Include="AdvantageAI_Web\Scripts\jquery-3.6.0.min.js" />
