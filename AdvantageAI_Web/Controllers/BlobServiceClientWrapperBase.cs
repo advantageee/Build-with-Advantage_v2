@@ -1,5 +1,4 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ using static Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.Controllers
 {
-    public class BlobServiceClientWrapperBase1
+    public class BlobServiceClientWrapperBase
     {
         private readonly BlobServiceClient _blobServiceClient;
         private readonly string _containerName = "advantageai-uploads";
@@ -49,18 +48,6 @@ namespace AdvantageAI_Web.Controllers
                 _logger.LogError(ex, "Error uploading file {FileName}", fileName);
                 throw;
             }
-        }
-    }
-
-    public class BlobServiceClientWrapper : BlobServiceClientWrapperBase1
-    {
-        public BlobServiceClientWrapper(IConfiguration configuration, ILogger<BlobServiceClientWrapper> logger)
-        {
-            var connectionString = configuration.GetConnectionString("AzureStorage");
-            if (string.IsNullOrEmpty(connectionString))
-                throw new ArgumentNullException(nameof(connectionString));
-            _blobServiceClient = new BlobServiceClient(connectionString);
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

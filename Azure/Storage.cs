@@ -28,6 +28,10 @@ namespace Azure
 
             internal class Models
             {
+                public class BlobProperties
+                {
+                }
+
                 internal class BlobUploadOptions
                 {
                     public bool Overwrite { get; set; }

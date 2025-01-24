@@ -343,6 +343,7 @@
     <Compile Include="AdvantageAI_Web\App_Start\RouteConfig.cs" />
     <Compile Include="AdvantageAI_Web\App_Start\WebApiConfig.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\BlobServiceClients.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\BlobServiceClientWrapperBase.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\ChatCompletionsOptions.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\DalleService.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\ErrorController.cs" />

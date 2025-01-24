@@ -63,6 +63,11 @@ namespace AdvantageAI_Web.App_Start
             public BlobClient GetBlobClient(string blobName) =>
                 // Implement the method to get a blob client
                 new BlobClient(connectionString, "containerName", blobName); // Placeholder
+
+            public static object GetBlobContainerClient(object containerName)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
