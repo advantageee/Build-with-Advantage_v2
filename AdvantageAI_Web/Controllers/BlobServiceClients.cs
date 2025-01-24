@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Microsoft.Azure.Storage.Blob;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
 using System.Memory.Data;
 using static Azure.Storage.Blobs.Models;
