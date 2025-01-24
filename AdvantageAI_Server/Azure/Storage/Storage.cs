@@ -2,28 +2,25 @@ using System;
 
 namespace Azure
 {
-    internal class Storage
+    internal class StorageService
     {
-        internal class Storage
+        internal class BlobServiceClient
         {
-            internal class BlobServiceClient
+            private string connectionString;
+
+            public BlobServiceClient(string connectionString)
             {
-                private string connectionString;
+                this.connectionString = connectionString;
+            }
 
-                public BlobServiceClient(string connectionString)
-                {
-                    this.connectionString = connectionString;
-                }
+            internal object GetBlobContainerClient(string containerName)
+            {
+                throw new NotImplementedException();
+            }
 
-                internal object GetBlobContainerClient(string containerName)
-                {
-                    throw new NotImplementedException();
-                }
-
-                internal object GetBlobContainerClient(object containerName)
-                {
-                    throw new NotImplementedException();
-                }
+            internal object GetBlobContainerClient(object containerName)
+            {
+                throw new NotImplementedException();
             }
         }
     }
