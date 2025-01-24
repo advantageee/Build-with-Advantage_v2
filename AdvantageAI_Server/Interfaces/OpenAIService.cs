@@ -240,11 +240,36 @@ namespace AdvantageAI_Server.Services
             }
         }
 
-        public Task<string> GenerateCodeSnippetAsync(string prompt)
+        public async Task<string> GenerateCodeSnippetAsync(string prompt)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(prompt))
+            {
+                throw new ArgumentException("Prompt cannot be null or empty.", nameof(prompt));
+            }
+
+            var requestBody = new
+            {
+                messages = new[]
+                {
+                    new { role = "system", content = "Generate a code snippet." },
+                    new { role = "user", content = prompt }
+                }
+            };
+
+            try
+            {
+                var response = await SendPostRequestAsync("/chat/completions", requestBody);
+                _logger.Debug($"Code snippet response: {response}");
+                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
+                return result?.Messages?[0]?.Content ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error generating code snippet.");
+                throw new InvalidOperationException("Failed to generate code snippet.", ex);
+            }
         }
-                  
+
         Task<AIResponse> IOpenAIService.GetChatCompletionAsync(List<ChatMessage> conversationHistory)
         {
             return GetChatCompletionAsync(conversationHistory);

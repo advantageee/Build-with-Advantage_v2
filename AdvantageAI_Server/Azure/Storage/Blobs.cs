@@ -1,4 +1,4 @@
-﻿namespace Azure.Storage
+namespace Azure.Storage
 {
     internal class Blobs
     {
