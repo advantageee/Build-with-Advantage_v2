@@ -27,7 +27,7 @@ namespace AdvantageAI_Server
         public static void RegisterComponents(IUnityContainer container)
         {
             // Correct interface usage
-            UnityConfig.RegisterComponents(UnityConfig.Container);
+            AdvantageAI_Web.UnityConfig.RegisterComponents(AdvantageAI_Web.UnityConfig.Container);
         }
         #endregion
 

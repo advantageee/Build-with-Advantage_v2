@@ -239,6 +239,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="AdvantageAI_Web\Model\ViewModels\HomeViewModel.cs" />
+    <Compile Include="AdvantageAI_Web\UnityConfig.cs" />
     <Compile Include="Unity\Mvc5.cs" />
     <Compile Include="Unity\UnityConfig.cs" />
     <Compile Include="Unity\UnityWebApiActivator.cs" />
@@ -418,6 +419,7 @@
     <Content Include="packages\bootstrap.5.2.3\content\Scripts\bootstrap.esm.min.js" />
     <Content Include="packages\bootstrap.5.2.3\content\Scripts\bootstrap.js" />
     <Content Include="packages\bootstrap.5.2.3\content\Scripts\bootstrap.min.js" />
+    <Content Include=".editorconfig" />
     <None Include="packages.config" />
     <None Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0-vsdoc.js" />
     <Content Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0.js" />

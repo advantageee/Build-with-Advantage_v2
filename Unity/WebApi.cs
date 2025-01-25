@@ -23,6 +23,10 @@ namespace Unity
                 this.container = container;
             }
 
+            public UnityDependencyResolver(AdvantageAI_Web.UnityWebApiActivator.IUnityContainer container1)
+            {
+            }
+
             public IDependencyScope BeginScope()
             {
                 throw new NotImplementedException();
