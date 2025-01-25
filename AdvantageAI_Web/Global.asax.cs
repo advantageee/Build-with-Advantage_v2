@@ -7,12 +7,15 @@ using Unity;
 using System.Web.Optimization;
 using AdvantageAI_Web.App_Start;
 using System.Web.Http;
-using BuildwithAdvantageAI;
+using static AdvantageAI_Web.UnityWebApiActivator;
+using AdvantageAI_Server;
 
 namespace AdvantageAI_Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static IUnityContainer container;
+
         protected void Application_Start()
         {
             try
@@ -20,7 +23,7 @@ namespace AdvantageAI_Web
                 Debug.WriteLine("Application Starting...");
 
                 // Initialize Unity Container
-                var container = new UnityContainer();
+                container = new UnityContainer();
                 UnityConfig.RegisterComponents(container);
 
                 // Register all areas

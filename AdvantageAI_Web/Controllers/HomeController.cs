@@ -1,13 +1,12 @@
 ﻿using AdvantageAIWeb.Services.Interfaces;
-using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System;
-using AvantageAI_Server.Controllers;
 using AdvantageAI_Web.Models.ViewModels;
 using System.Web;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
+using AdvantageAI_Web.App_Start;
 
 namespace AdvantageAI_Web.Controllers
 {
@@ -19,12 +18,11 @@ namespace AdvantageAI_Web.Controllers
         private readonly IVisionService _visionService;
         private readonly IDalleService _dalleService;
         private readonly ICodeGenerationService _codeGenerationService;
-        private readonly BlobServiceClient _blobServiceClient;
+        private readonly AdvantageAIService.BlobServiceClient _blobServiceClient;
         private readonly MemoryStream _stream;
         private readonly ILogger<HomeController> _logger;
         private static readonly Task completedTaskInstance = Task.CompletedTask;
-        private Task result = completedTaskInstance;
-
+        private Task result;
         private readonly string _filePath;
 
         public HomeController(
@@ -34,7 +32,7 @@ namespace AdvantageAI_Web.Controllers
             IVisionService visionService,
             IDalleService dalleService,
             ICodeGenerationService codeGenerationService,
-            BlobServiceClient blobServiceClient,
+            AdvantageAIService.BlobServiceClient blobServiceClient,
             ILogger<HomeController> logger,
             string filePath)
         {
@@ -47,6 +45,7 @@ namespace AdvantageAI_Web.Controllers
             _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
             _stream = new MemoryStream();
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            result = completedTaskInstance;
             _filePath = filePath;
         }
 
@@ -223,5 +222,12 @@ namespace AdvantageAI_Web.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    public interface ILogger<T>
+    {
+        void LogError(Exception ex, string v);
+        void LogError(string v);
+        void LogInformation(string v);
     }
 }
