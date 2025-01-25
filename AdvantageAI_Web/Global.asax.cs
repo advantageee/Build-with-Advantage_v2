@@ -7,13 +7,18 @@ using Unity;
 using System.Web.Optimization;
 using AdvantageAI_Web.App_Start;
 using System.Web.Http;
-using BuildwithAdvantageAI;
+using static AdvantageAI_Web.UnityWebApiActivator;
+using AdvantageAI_Server;
 
 namespace AdvantageAI_Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
         private static IUnityContainer container;
+
+        public object FilterConfig { get; private set; }
+        public object RouteConfig { get; private set; }
+        public object BundleConfig { get; private set; }
 
         protected void Application_Start()
         {
