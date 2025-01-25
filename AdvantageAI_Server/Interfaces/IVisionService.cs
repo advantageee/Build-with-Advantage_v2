@@ -63,6 +63,6 @@ namespace AdvantageAIWeb.Services.Interfaces
     {
         public string Description { get; set; }
         public string[] Tags { get; set; }
-        public string[] Categories { get; internal set; }
+        public string[] Categories { get; set; }
     }
 }
