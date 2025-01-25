@@ -3,6 +3,7 @@ using AdvantageAI_Web;
 using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
+using static AdvantageAI_Web.UnityWebApiActivator;
 
 namespace Unity
 {
@@ -10,13 +11,14 @@ namespace Unity
     {
         internal class UnityDependencyResolver : IDependencyResolver
         {
-            private IUnityContainer container;
+            private AdvantageAI_Web.IUnityContainer container;
 
             public UnityDependencyResolver(UnityWebApiActivator.IUnityContainer container)
             {
+                this.container = (AdvantageAI_Web.IUnityContainer)container;
             }
 
-            public UnityDependencyResolver(IUnityContainer container)
+            public UnityDependencyResolver(AdvantageAI_Web.IUnityContainer container)
             {
                 this.container = container;
             }
