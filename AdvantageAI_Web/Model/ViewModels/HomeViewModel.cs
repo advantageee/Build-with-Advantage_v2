@@ -1,7 +1,6 @@
 ﻿using AdvantageAIWeb.Models.AI;
 using AdvantageAIWeb.Models.Chat;
 using AdvantageAIWeb.ViewModels;
-using AvantageAI_Server.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -10,7 +9,6 @@ namespace AdvantageAI_Web.Models.ViewModels
 {
     public class HomeViewModel
     {
-
         /// <summary>
         /// Model for AI interactions.
         /// </summary>
@@ -19,21 +17,22 @@ namespace AdvantageAI_Web.Models.ViewModels
         /// <summary>
         /// Model for image generation prompts.
         /// </summary>
-        public AdvantageAIWeb.ViewModels.ImagePromptViewModel ImagePromptModel { get; set; } = new AdvantageAIWeb.ViewModels.ImagePromptViewModel();
+        public ImagePromptViewModel ImagePromptModel { get; set; } = new ImagePromptViewModel();
 
         /// <summary>
         /// Model for chat interactions.
         /// </summary>
-        public AdvantageAIWeb.ViewModels.ChatViewModel ChatModel { get; set; } = new AdvantageAIWeb.ViewModels.ChatViewModel();
+        public ChatViewModel ChatModel { get; set; } = new ChatViewModel();
 
         /// <summary>
         /// Model for image caption generation.
         /// </summary>
-        public AvantageAI_Server.ViewModels.ImageCaptionViewModel ImageCaptionModel { get; set; } = new AvantageAI_Server.ViewModels.ImageCaptionViewModel();
+        public ImageCaptionViewModel ImageCaptionModel { get; set; } = new ImageCaptionViewModel();
+
         /// <summary>
         /// Model for code snippet generation.
         /// </summary>
-        public AdvantageAIWeb.ViewModels.CodeSnippetViewModel CodeSnippetModel { get; set; } = new AdvantageAIWeb.ViewModels.CodeSnippetViewModel();
+        public CodeSnippetViewModel CodeSnippetModel { get; set; } = new CodeSnippetViewModel();
 
         /// <summary>
         /// List of supported languages for selection.
@@ -120,6 +119,22 @@ namespace AdvantageAI_Web.Models.ViewModels
             Languages.Add(new SelectListItem { Value = "yue", Text = "Cantonese (Traditional)" });
             Languages.Add(new SelectListItem { Value = "zh-Hans", Text = "Chinese (Simplified)" });
             Languages.Add(new SelectListItem { Value = "zh-Hant", Text = "Chinese (Traditional)" });
+        }
+
+        public class CodeSnippetViewModel
+        {
+        }
+
+        public class ImageCaptionViewModel
+        {
+        }
+
+        public class ChatViewModel
+        {
+        }
+
+        public class ImagePromptViewModel
+        {
         }
     }
     public class AIModel
