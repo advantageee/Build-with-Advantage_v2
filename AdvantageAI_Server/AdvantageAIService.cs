@@ -3,8 +3,6 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Azure.Storage.Blobs.Models;
-using static Azure.Storage.Blobs;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 

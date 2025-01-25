@@ -23,7 +23,11 @@ namespace AdvantageAI_Server
         /// </summary>
         public static IUnityContainer Container => container.Value;
 
-        public static void RegisterComponents(AdvantageAI_Web.MvcApplication.container container) => throw new NotImplementedException();
+        public static void RegisterComponents(IUnityContainer container)
+        {
+            // Correct interface usage
+            UnityConfig.RegisterComponents(UnityConfig.Container);
+        }
         #endregion
 
         /// <summary>
@@ -44,11 +48,6 @@ namespace AdvantageAI_Server
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-        }
-
-        internal static void RegisterComponents(IUnityContainer container)
-        {
-            throw new NotImplementedException();
         }
     }
 }
