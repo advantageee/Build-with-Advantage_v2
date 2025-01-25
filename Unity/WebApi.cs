@@ -13,7 +13,7 @@ namespace Unity
         {
             private AdvantageAI_Web.IUnityContainer container;
 
-            public UnityDependencyResolver(UnityWebApiActivator.IUnityContainer container)
+            public UnityDependencyResolver(AdvantageAI_Server.UnityWebApiActivator.IUnityContainer container)
             {
                 this.container = (AdvantageAI_Web.IUnityContainer)container;
             }
