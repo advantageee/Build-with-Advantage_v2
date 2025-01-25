@@ -66,17 +66,36 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="AdvantageAI_Web\Model\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Unity\UnityConfig.cs" />
+    <Compile Include="Unity\UnityWebApiActivator.cs" />
+    <Compile Include="Unity\WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdvantageAI_Web\Content\Site.css" />
     <Content Include="AdvantageAI_Web\favicon.ico" />
     <Content Include="AdvantageAI_Web\Views\Home\Index.cshtml" />
+    <Content Include="Build with Advantage.csproj.user" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="AdvantageAI_Server\AdvantageAI_Server.csproj">
       <Project>{01C47095-C67B-44EB-A9A6-9150A0055BD3}</Project>
       <Name>AdvantageAI_Server</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <None Include="packages.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v17.0\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
