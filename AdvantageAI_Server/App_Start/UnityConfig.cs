@@ -23,10 +23,7 @@ namespace AdvantageAI_Server
         /// </summary>
         public static IUnityContainer Container => container.Value;
 
-        public static void RegisterComponents(AdvantageAI_Web.MvcApplication.container container)
-        {
-            throw new NotImplementedException();
-        }
+        public static void RegisterComponents(AdvantageAI_Web.MvcApplication.container container) => throw new NotImplementedException();
         #endregion
 
         /// <summary>
