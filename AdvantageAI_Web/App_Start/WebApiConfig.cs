@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+using System.Web.Http;
+using Unity;
 
 namespace BuildwithAdvantageAI
 {
@@ -16,6 +17,10 @@ namespace BuildwithAdvantageAI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Ensure UnityConfig is correctly referenced
+            var container = UnityConfig.Container;
+            config.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
         }
     }
 }

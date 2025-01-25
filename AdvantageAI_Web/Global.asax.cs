@@ -16,10 +16,6 @@ namespace AdvantageAI_Web
     {
         private static IUnityContainer container;
 
-        public object FilterConfig { get; private set; }
-        public object RouteConfig { get; private set; }
-        public object BundleConfig { get; private set; }
-
         protected void Application_Start()
         {
             try
@@ -104,7 +100,6 @@ namespace AdvantageAI_Web
         {
             try
             {
-                container?.Dispose();
                 Debug.WriteLine("Application Ended - Resources Cleaned Up");
             }
             catch (Exception ex)
