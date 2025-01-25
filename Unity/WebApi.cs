@@ -11,9 +11,14 @@ namespace Unity
     {
         internal class UnityDependencyResolver : IDependencyResolver
         {
-            private IUnityContainer container;
+            private AdvantageAI_Web.IUnityContainer container;
 
             public UnityDependencyResolver(UnityWebApiActivator.IUnityContainer container)
+            {
+                this.container = (AdvantageAI_Web.IUnityContainer)container;
+            }
+
+            public UnityDependencyResolver(AdvantageAI_Web.IUnityContainer container)
             {
                 this.container = container;
             }

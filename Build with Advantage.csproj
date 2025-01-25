@@ -94,26 +94,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvantageAI_Web\App_Start\BundleConfig.cs" />
+    <Compile Include="AdvantageAI_Web\App_Start\FilterConfig.cs" />
+    <Compile Include="AdvantageAI_Web\App_Start\RouteConfig.cs" />
+    <Compile Include="AdvantageAI_Web\App_Start\UnityConfigHelpers.cs" />
+    <Compile Include="AdvantageAI_Web\App_Start\WebApiConfig.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\HomeController.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\ErrorController.cs" />
     <Compile Include="AdvantageAI_Web\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="AdvantageAI_Web\Model\ViewModels\HomeViewModel.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Compile Include="Unity\Mvc5.cs" />
     <Compile Include="Unity\UnityConfig.cs" />
     <Compile Include="Unity\UnityWebApiActivator.cs" />
+    <Compile Include="Unity\UnityWebApiConfig.cs" />
     <Compile Include="Unity\WebApi.cs" />
+    <Compile Include="WebApiConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdvantageAI_Web\Content\Site.css" />
     <Content Include="AdvantageAI_Web\favicon.ico" />
+    <Content Include="AdvantageAI_Web\Global.asax" />
     <Content Include="AdvantageAI_Web\Views\Home\Index.cshtml" />
     <Content Include="Build with Advantage.csproj.user" />
-    <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="AdvantageAI_Server\AdvantageAI_Server.csproj">

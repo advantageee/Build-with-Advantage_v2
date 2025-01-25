@@ -486,8 +486,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvantageAI_Web\MvcApplication.cs" />
-    <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="App_Start\UnityWebApiConfig.cs" />
     <Compile Include="Configuration\ServiceConfig.cs" />
     <Compile Include="Interfaces\AdvantageAIService.cs" />
     <Compile Include="Interfaces\CodeGenerationService.cs" />

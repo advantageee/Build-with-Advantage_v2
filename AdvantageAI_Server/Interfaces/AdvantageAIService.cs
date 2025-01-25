@@ -49,6 +49,10 @@ namespace AdvantageAI_Web.App_Start
                 this.connectionString = connectionString;
             }
 
+            public BlobServiceClient()
+            {
+            }
+
             public BlobContainerClient GetBlobContainerClient(string containerName)
             {
                 throw new NotImplementedException();
