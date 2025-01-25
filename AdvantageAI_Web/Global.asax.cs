@@ -112,6 +112,10 @@ namespace AdvantageAI_Web
         public class container
         {
         }
+
+        public class Container
+        {
+        }
     }
 
     internal class UnityContainer : IUnityContainer
