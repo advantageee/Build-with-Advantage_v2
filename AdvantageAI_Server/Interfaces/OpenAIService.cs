@@ -274,6 +274,11 @@ namespace AdvantageAI_Server.Services
         {
             return GetChatCompletionAsync(conversationHistory);
         }
+
+        public Task<AIResponse> GetChatCompletionAsync(List<Azure.AI.OpenAI.ChatMessage> conversationHistory, string deploymentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class AIResponse
