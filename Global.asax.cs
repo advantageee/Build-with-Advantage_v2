@@ -7,16 +7,11 @@ using Unity;
 using System.Web.Optimization;
 using AdvantageAI_Web.App_Start;
 using System.Web.Http;
-using static AdvantageAI_Web.UnityWebApiActivator;
-using AdvantageAI_Server;
-using BuildwithAdvantageAI;
 
 namespace AdvantageAI_Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        private static IUnityContainer unityContainer;
-
         protected void Application_Start()
         {
             try
@@ -24,22 +19,22 @@ namespace AdvantageAI_Web
                 Debug.WriteLine("Application Starting...");
 
                 // Initialize Unity Container
-                unityContainer = new UnityContainer();
+                var unityContainer = new UnityContainer();
                 UnityConfig.RegisterComponents(unityContainer);
 
                 // Register all areas
                 AreaRegistration.RegisterAllAreas();
 
                 // Register Web API routes and config
-                GlobalConfiguration.Configure(BuildwithAdvantageAI.WebApiConfig.Register);
+                GlobalConfiguration.Configure(App_Start.WebApiConfig.Register);
 
                 // Register MVC components
-                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-                RouteConfig.RegisterRoutes(RouteTable.Routes);
-                BundleConfig.RegisterBundles(BundleTable.Bundles);
+                App_Start.FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                App_Start.RouteConfig.RegisterRoutes(RouteTable.Routes);
+                App_Start.BundleConfig.RegisterBundles(BundleTable.Bundles);
 
                 // Set Unity as the dependency resolver for both MVC and Web API
-                DependencyResolver.SetResolver(new Mvc5.UnityDependencyResolver(unityContainer));
+                DependencyResolver.SetResolver(new Unity.Mvc5.UnityDependencyResolver(unityContainer));
                 GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(unityContainer);
 
                 Debug.WriteLine("Application Started Successfully");
@@ -108,34 +103,5 @@ namespace AdvantageAI_Web
                 Debug.WriteLine($"Error during application shutdown: {ex.Message}");
             }
         }
-
-        public class container
-        {
-        }
-    }
-
-    internal class UnityContainer : IUnityContainer
-    {
-        public void RegisterInstance<T>(object loggerFactory)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RegisterType<T1, T2>(Type type, Type type1)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RegisterType<T1, T2>()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    internal interface IUnityContainer
-    {
-        void RegisterInstance<T>(object loggerFactory);
-        void RegisterType<T1, T2>(Type type, Type type1);
-        void RegisterType<T1, T2>();
     }
 }

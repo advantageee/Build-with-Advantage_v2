@@ -8,30 +8,26 @@ namespace AdvantageAI_Server
     /// <summary>
     /// Specifies the Unity configuration for the main container.
     /// </summary>
-    public static class UnityConfig
+    public static class UnityWebApiConfig
     {
         #region Unity Container
         private static Lazy<IUnityContainer> container =
           new Lazy<IUnityContainer>(() =>
           {
-              var container = new AdvantageAI_Web.UnityContainer();
+              var container = new UnityContainer();
               RegisterTypes(container);
-              return (IUnityContainer)container;
+              return container;
           });
-
-        private static void RegisterTypes(AdvantageAI_Web.UnityContainer container)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Configured Unity Container.
         /// </summary>
         public static IUnityContainer Container => container.Value;
 
-        public static void RegisterComponents(AdvantageAI_Web.MvcApplication.container container)
+        public static void RegisterComponents(IUnityContainer container)
         {
-            throw new NotImplementedException();
+            // Correct interface usage
+            UnityConfig.RegisterComponents(UnityConfig.Container);
         }
         #endregion
 
@@ -55,19 +51,8 @@ namespace AdvantageAI_Server
             // container.RegisterType<IProductRepository, ProductRepository>();
         }
 
-        internal static void RegisterComponents(IUnityContainer container)
+        private class UnityContainer : IUnityContainer
         {
-            throw new NotImplementedException();
-        }
-
-        internal static void RegisterComponents(AdvantageAI_Web.UnityContainer unityContainer)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void RegisterComponents(AdvantageAI_Web.IUnityContainer unityContainerInstance)
-        {
-            throw new NotImplementedException();
         }
     }
 }
