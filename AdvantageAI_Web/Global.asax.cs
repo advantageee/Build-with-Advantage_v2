@@ -13,8 +13,6 @@ namespace AdvantageAI_Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        private static IUnityContainer container;
-
         protected void Application_Start()
         {
             try
@@ -22,7 +20,7 @@ namespace AdvantageAI_Web
                 Debug.WriteLine("Application Starting...");
 
                 // Initialize Unity Container
-                container = new UnityContainer();
+                var container = new UnityContainer();
                 UnityConfig.RegisterComponents(container);
 
                 // Register all areas
@@ -99,7 +97,6 @@ namespace AdvantageAI_Web
         {
             try
             {
-                container?.Dispose();
                 Debug.WriteLine("Application Ended - Resources Cleaned Up");
             }
             catch (Exception ex)

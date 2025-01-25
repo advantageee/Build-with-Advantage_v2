@@ -1,10 +1,11 @@
 using System.Web.Http;
-using static Unity.WebApi;
+using Unity;
+using Unity.WebApi;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AdvantageAI_Server.UnityWebApiActivator), nameof(AdvantageAI_Server.UnityWebApiActivator.Start))]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(AdvantageAI_Server.UnityWebApiActivator), nameof(AdvantageAI_Server.UnityWebApiActivator.Shutdown))]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AdvantageAI_Web.UnityWebApiActivator), nameof(AdvantageAI_Web.UnityWebApiActivator.Start))]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(AdvantageAI_Web.UnityWebApiActivator), nameof(AdvantageAI_Web.UnityWebApiActivator.Shutdown))]
 
-namespace AdvantageAI_Server
+namespace AdvantageAI_Web
 {
     /// <summary>
     /// Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET.
@@ -30,10 +31,6 @@ namespace AdvantageAI_Server
         public static void Shutdown()
         {
             UnityConfig.Container.Dispose();
-        }
-
-        public interface IUnityContainer
-        {
         }
     }
 }
