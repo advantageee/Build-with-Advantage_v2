@@ -41,7 +41,7 @@ internal static class UnityConfigHelpers
         container.RegisterInstance<BlobServiceClient>(new BlobServiceClient());
 
         // Register NLog logger
-        container.RegisterInstance<NLog.ILogger>((NLog.ILogger)LogManager.GetCurrentClassLogger());
+        container.RegisterInstance<NLog.ILogger>((NLog.ILogger)AdvantageAIWeb.Services.LogManager.GetCurrentClassLogger());
     }
 
     private class Logger<T>

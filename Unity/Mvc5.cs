@@ -13,6 +13,13 @@ namespace Unity
             {
             }
 
+            public UnityDependencyResolver(AdvantageAI_Web.IUnityContainer unityContainer)
+            {
+                UnityContainer = unityContainer;
+            }
+
+            public AdvantageAI_Web.IUnityContainer UnityContainer { get; }
+
             public object GetService(Type serviceType)
             {
                 throw new NotImplementedException();

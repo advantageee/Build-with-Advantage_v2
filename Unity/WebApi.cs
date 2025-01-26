@@ -27,6 +27,13 @@ namespace Unity
             {
             }
 
+            public UnityDependencyResolver(IUnityContainer container1)
+            {
+                Container = container1;
+            }
+
+            public IUnityContainer Container { get; }
+
             public IDependencyScope BeginScope()
             {
                 throw new NotImplementedException();
