@@ -35,6 +35,8 @@ namespace AdvantageAI_Server
 
         public interface IUnityContainer
         {
+            void RegisterInstance<T>(Microsoft.Extensions.Logging.LoggerFactory loggerFactory);
+            void RegisterType<T1, T2>();
         }
     }
 }

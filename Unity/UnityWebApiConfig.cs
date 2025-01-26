@@ -11,20 +11,25 @@ namespace AdvantageAI_Server
     public static class UnityWebApiConfig
     {
         #region Unity Container
-        private static Lazy<IUnityContainer> container =
-          new Lazy<IUnityContainer>(() =>
+        private static Lazy<AdvantageAI_Server.UnityWebApiActivator.IUnityContainer> container =
+          new Lazy<AdvantageAI_Server.UnityWebApiActivator.IUnityContainer>(() =>
           {
               var container = new UnityContainer();
               RegisterTypes(container);
-              return container;
+              return (UnityWebApiActivator.IUnityContainer)container;
           });
+
+        private static void RegisterTypes(UnityContainer container)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Configured Unity Container.
         /// </summary>
-        public static IUnityContainer Container => container.Value;
+        public static AdvantageAI_Server.UnityWebApiActivator.IUnityContainer Container => container.Value;
 
-        public static void RegisterComponents(IUnityContainer container)
+        public static void RegisterComponents(AdvantageAI_Server.UnityWebApiActivator.IUnityContainer container)
         {
             // Correct interface usage
             AdvantageAI_Web.UnityConfig.RegisterComponents(AdvantageAI_Web.UnityConfig.Container);
@@ -41,7 +46,7 @@ namespace AdvantageAI_Server
         /// allows resolving a concrete type even if it was not previously
         /// registered.
         /// </remarks>
-        public static void RegisterTypes(IUnityContainer container)
+        public static void RegisterTypes(AdvantageAI_Server.UnityWebApiActivator.IUnityContainer container)
         {
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
@@ -51,7 +56,7 @@ namespace AdvantageAI_Server
             // container.RegisterType<IProductRepository, ProductRepository>();
         }
 
-        private class UnityContainer : IUnityContainer
+        private class UnityContainer : AdvantageAI_Web.UnityWebApiActivator.IUnityContainer
         {
         }
     }

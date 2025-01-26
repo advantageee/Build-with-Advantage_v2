@@ -1,73 +1,46 @@
 using System;
-
 using Unity;
-using static AdvantageAI_Web.UnityWebApiActivator;
+using Unity.Lifetime;
+using AdvantageAIWeb.Services.Interfaces;
+using AdvantageAIWeb.Services;
+using System.Threading.Tasks;
 
-namespace AdvantageAI_Server
+namespace AdvantageAIWeb
 {
-    /// <summary>
-    /// Specifies the Unity configuration for the main container.
-    /// </summary>
     public static class UnityConfig
     {
-        #region Unity Container
-        private static Lazy<IUnityContainer> container =
-          new Lazy<IUnityContainer>(() =>
-          {
-              var container = new AdvantageAI_Web.UnityContainer();
-              RegisterTypes(container);
-              return (IUnityContainer)container;
-          });
-
-        private static void RegisterTypes(AdvantageAI_Web.UnityContainer container)
+        private static readonly Lazy<Unity.IUnityContainer> container = new Lazy<Unity.IUnityContainer>(() =>
         {
-            throw new NotImplementedException();
+            var container = new Unity.UnityContainer();
+            RegisterTypes(container);
+            return container;
+        });
+
+        public static Unity.IUnityContainer Container => container.Value;
+
+        private static void RegisterTypes(Unity.IUnityContainer container)
+        {
+            // Core AI Services
+            container.RegisterType<IAdvantageAIService, AdvantageAI_Web.App_Start.AdvantageAIService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IOpenAIService, AdvantageAI_Server.Services.OpenAIService>(new ContainerControlledLifetimeManager());
+
+            // Translation and Vision Services (with corrected namespaces)
+            container.RegisterType<ITranslatorService, TranslatorService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IVisionService, AdvantageAI_Server.Models.VisionService>(new ContainerControlledLifetimeManager());
+
+            // Image and Code Generation Services
+            container.RegisterType<IDalleService, DalleService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ICodeGenerationService, CodeGenerationService>(new ContainerControlledLifetimeManager());
+
+            // Data Retrieval (fixing missing service reference)
+            container.RegisterType<RetrievalIService, RetrievalIService>(new ContainerControlledLifetimeManager());
         }
 
-        /// <summary>
-        /// Configured Unity Container.
-        /// </summary>
-        public static IUnityContainer Container => container.Value;
-
-        public static void RegisterComponents(AdvantageAI_Web.MvcApplication.Container container)
+        public static void RegisterComponents(Unity.IUnityContainer container)
         {
-            throw new NotImplementedException();
-        }
-        #endregion
-
-        /// <summary>
-        /// Registers the type mappings with the Unity container.
-        /// </summary>
-        /// <param name="container">The unity container to configure.</param>
-        /// <remarks>
-        /// There is no need to register concrete types such as controllers or
-        /// API controllers (unless you want to change the defaults), as Unity
-        /// allows resolving a concrete type even if it was not previously
-        /// registered.
-        /// </remarks>
-        public static void RegisterTypes(IUnityContainer container)
-        {
-            // NOTE: To load from web.config uncomment the line below.
-            // Make sure to add a Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
-
-            // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
-        }
-
-        internal static void RegisterComponents(IUnityContainer container)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void RegisterComponents(AdvantageAI_Web.UnityContainer unityContainer)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void RegisterComponents(AdvantageAI_Web.IUnityContainer unityContainerInstance)
-        {
-            throw new NotImplementedException();
+            RegisterTypes(container);
         }
     }
-}
+       }
+
+

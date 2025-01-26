@@ -1,9 +1,9 @@
-﻿using Microsoft.Build.Utilities;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using WebGrease;
 using AdvantageAI.Services;
 using Microsoft.Build.Framework;
+using NLog;
 
 namespace AdvantageAI.Services
 {
@@ -43,7 +43,7 @@ namespace AdvantageAI.Services
                     null,
                     null
                 );
-                _logger.FormatErrorEvent(buildErrorEventArgs);
+                _logger.Error(buildErrorEventArgs.Message);
                 throw;
             }
         }

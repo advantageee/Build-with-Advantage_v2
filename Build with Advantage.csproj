@@ -74,6 +74,9 @@
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.9.0.1\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.DependencyInjection.9.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
@@ -185,6 +188,7 @@
     <Reference Include="System.Web" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -220,8 +224,16 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>packages\Unity.5.11.10\lib\net48\Unity.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Unity.Configuration, Version=5.11.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>packages\Unity.Configuration.5.11.2\lib\net47\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>packages\Unity.5.11.10\lib\net48\Unity.Container.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -233,14 +245,24 @@
     <Compile Include="AdvantageAI_Web\App_Start\RouteConfig.cs" />
     <Compile Include="AdvantageAI_Web\App_Start\UnityConfigHelpers.cs" />
     <Compile Include="AdvantageAI_Web\App_Start\WebApiConfig.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\BlobServiceClients.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\BlobServiceClientWrapperBase.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\ChatCompletionsOptions.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\DalleService.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\HomeController.cs" />
     <Compile Include="AdvantageAI_Web\Controllers\ErrorController.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\ImageCaptionRequest.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\LogManager.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\RetrievalService.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\TranslatorService.cs" />
+    <Compile Include="AdvantageAI_Web\Controllers\VisionService.cs" />
     <Compile Include="AdvantageAI_Web\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="AdvantageAI_Web\Model\ViewModels\HomeViewModel.cs" />
     <Compile Include="AdvantageAI_Web\UnityConfig.cs" />
     <Compile Include="Unity\Mvc5.cs" />
+    <Compile Include="Unity\RetrievalService.cs" />
     <Compile Include="Unity\UnityConfig.cs" />
     <Compile Include="Unity\UnityWebApiActivator.cs" />
     <Compile Include="Unity\UnityWebApiConfig.cs" />

@@ -5,7 +5,7 @@ namespace AdvantageAIWeb.Services.Interfaces
     /// <summary>
     /// Interface for retrieving relevant documents based on a search query.
     /// </summary>
-    public interface IRetrievalService
+    public interface RetrievalIService
     {
         /// <summary>
         /// Retrieves documents relevant to the specified query.

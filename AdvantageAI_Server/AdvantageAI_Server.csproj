@@ -507,6 +507,7 @@
     <Compile Include="Interfaces\ITranslatorService.cs" />
     <Compile Include="Interfaces\IVisionService.cs" />
     <Compile Include="Interfaces\OpenAIService.cs" />
+    <Compile Include="Microsoft\Extensions\Logging\LoggerFactory.cs" />
     <Compile Include="Models\ChatRole.cs" />
     <Compile Include="Models\DocumentTranslationResult.cs" />
     <Compile Include="Models\ImageCaption.cs" />

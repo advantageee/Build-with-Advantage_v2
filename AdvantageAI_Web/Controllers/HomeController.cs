@@ -228,6 +228,7 @@ namespace AdvantageAI_Web.Controllers
     {
         void LogError(Exception ex, string v);
         void LogError(string v);
+        void LogError(Exception ex, string v, string fileName);
         void LogInformation(string v);
     }
 }
