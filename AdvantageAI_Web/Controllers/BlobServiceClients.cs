@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace AdvantageAI_Web.Controllers
 {
@@ -18,6 +19,14 @@ namespace AdvantageAI_Web.Controllers
         {
             _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BlobServiceClientWrapperBase1 @base &&
+                   EqualityComparer<BlobServiceClient>.Default.Equals(_blobServiceClient, @base._blobServiceClient) &&
+                   _containerName == @base._containerName &&
+                   EqualityComparer<ILogger<BlobServiceClientWrapperBase1>>.Default.Equals(_logger, @base._logger);
         }
 
         public async Task<BlobProperties> GetFilePropertiesAsync(string fileName)
