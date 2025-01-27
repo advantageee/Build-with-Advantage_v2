@@ -4,20 +4,17 @@ using System.IO;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using static AdvantageAI_Web.App_Start.AdvantageAIService;
-using NLog;
-using BlobServiceClient = AdvantageAI_Web.App_Start.AdvantageAIService.BlobServiceClient;
 using Microsoft.Extensions.Configuration;
 
 namespace AdvantageAI_Web.Controllers
 {
     public class BlobServiceClientWrapperBase1
     {
-        protected readonly BlobServiceClient _blobServiceClient; // Changed to protected
+        protected readonly BlobServiceClient _blobServiceClient; // Correct instance type
         private readonly string _containerName = "advantageai-uploads";
-        private readonly ILogger<BlobServiceClientWrapper> _logger;
+        private readonly ILogger<BlobServiceClientWrapperBase1> _logger;
 
-        public BlobServiceClientWrapperBase1(BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapper> logger)
+        public BlobServiceClientWrapperBase1(BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapperBase1> logger)
         {
             _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -27,12 +24,15 @@ namespace AdvantageAI_Web.Controllers
         {
             try
             {
+                // Using instance reference instead of static reference
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
                 var blobClient = containerClient.GetBlobClient(fileName);
+
                 if (!await blobClient.ExistsAsync())
                 {
                     throw new FileNotFoundException($"File {fileName} not found");
                 }
+
                 var blobProperties = await blobClient.GetPropertiesAsync();
                 return blobProperties.Value;
             }
@@ -48,9 +48,13 @@ namespace AdvantageAI_Web.Controllers
             try
             {
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
+
+                // Corrected method call to ensure it operates on the right instance
                 await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
+
                 var blobClient = containerClient.GetBlobClient(fileName);
                 await blobClient.UploadAsync(fileStream, overwrite: true);
+
                 return blobClient.Uri.ToString();
             }
             catch (Exception ex)
@@ -64,11 +68,8 @@ namespace AdvantageAI_Web.Controllers
     public class BlobServiceClientWrapper : BlobServiceClientWrapperBase1
     {
         public BlobServiceClientWrapper(IConfiguration configuration, ILogger<BlobServiceClientWrapper> logger)
-            : base(new BlobServiceClient(configuration.GetConnectionString("AzureStorage")), logger)
+            : base(new BlobServiceClient(configuration.GetConnectionString("AzureStorage")), (ILogger<BlobServiceClientWrapperBase1>)logger)
         {
-            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
-
-        public ILogger<BlobServiceClientWrapper> Logger { get; }
     }
 }

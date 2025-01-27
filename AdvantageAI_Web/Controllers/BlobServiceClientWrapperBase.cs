@@ -1,31 +1,36 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using static AdvantageAI_Web.App_Start.AdvantageAIService;
-
-using Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.Controllers
 {
-    public class BlobServiceClientWrapperBase(App_Start.AdvantageAIService.BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapperBase> logger)
+    public class BlobServiceClientWrapperBase
     {
-        private readonly App_Start.AdvantageAIService.BlobServiceClient _blobServiceClient = blobServiceClient;
+        private readonly BlobServiceClient _blobServiceClient;
+        private readonly ILogger<BlobServiceClientWrapperBase> _logger;
         private readonly string _containerName = "advantageai-uploads";
-        private readonly ILogger<BlobServiceClientWrapperBase> _logger = logger;
 
-        internal PublicAccessType PublicAccessType { get; private set; }
+        public BlobServiceClientWrapperBase(BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapperBase> logger)
+        {
+            _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
 
-        public async Task<Azure.Storage.Blobs.Models.BlobProperties> GetFilePropertiesAsync(string fileName)
+        public async Task<BlobProperties> GetFilePropertiesAsync(string fileName)
         {
             try
             {
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
                 var blobClient = containerClient.GetBlobClient(fileName);
+
                 if (!await blobClient.ExistsAsync())
                 {
                     throw new FileNotFoundException($"File {fileName} not found");
                 }
+
                 var blobProperties = await blobClient.GetPropertiesAsync();
                 return blobProperties.Value;
             }
@@ -36,14 +41,21 @@ namespace AdvantageAI_Web.Controllers
             }
         }
 
+        public BlobServiceClient GetBlobServiceClient()
+        {
+            return _blobServiceClient;
+        }
+
         public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
         {
             try
             {
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
                 await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
+
                 var blobClient = containerClient.GetBlobClient(fileName);
                 await blobClient.UploadAsync(fileStream);
+
                 return blobClient.Uri.ToString();
             }
             catch (Exception ex)
