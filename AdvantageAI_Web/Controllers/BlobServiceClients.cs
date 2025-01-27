@@ -31,10 +31,10 @@ namespace AdvantageAI_Web.Controllers
 
         public bool Equals(BlobServiceClientWrapperBase1 other)
         {
-            return other is not null &&
-                   EqualityComparer<BlobServiceClient>.Default.Equals(_blobServiceClient, other._blobServiceClient) &&
-                   _containerName == other._containerName &&
-                   EqualityComparer<ILogger<BlobServiceClientWrapperBase1>>.Default.Equals(_logger, other._logger);
+            return !(other is null ||
+!EqualityComparer<BlobServiceClient>.Default.Equals(_blobServiceClient, other._blobServiceClient) ||
+                   _containerName != other._containerName ||
+!EqualityComparer<ILogger<BlobServiceClientWrapperBase1>>.Default.Equals(_logger, other._logger));
         }
 
         public async Task<BlobProperties> GetFilePropertiesAsync(string fileName)
