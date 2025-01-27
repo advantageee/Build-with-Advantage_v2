@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace AdvantageAI_Web.Controllers
 {
-    public class BlobServiceClientWrapperBase1
+    public class BlobServiceClientWrapperBase1 : IEquatable<BlobServiceClientWrapperBase1>
     {
         protected readonly BlobServiceClient _blobServiceClient; // Correct instance type
         private readonly string _containerName = "advantageai-uploads";
@@ -27,6 +27,14 @@ namespace AdvantageAI_Web.Controllers
                    EqualityComparer<BlobServiceClient>.Default.Equals(_blobServiceClient, @base._blobServiceClient) &&
                    _containerName == @base._containerName &&
                    EqualityComparer<ILogger<BlobServiceClientWrapperBase1>>.Default.Equals(_logger, @base._logger);
+        }
+
+        public bool Equals(BlobServiceClientWrapperBase1 other)
+        {
+            return other is not null &&
+                   EqualityComparer<BlobServiceClient>.Default.Equals(_blobServiceClient, other._blobServiceClient) &&
+                   _containerName == other._containerName &&
+                   EqualityComparer<ILogger<BlobServiceClientWrapperBase1>>.Default.Equals(_logger, other._logger);
         }
 
         public async Task<BlobProperties> GetFilePropertiesAsync(string fileName)
@@ -52,6 +60,15 @@ namespace AdvantageAI_Web.Controllers
             }
         }
 
+        public override int GetHashCode()
+        {
+            int hashCode = -814239533;
+            hashCode = hashCode * -1521134295 + EqualityComparer<BlobServiceClient>.Default.GetHashCode(_blobServiceClient);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_containerName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ILogger<BlobServiceClientWrapperBase1>>.Default.GetHashCode(_logger);
+            return hashCode;
+        }
+
         public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
         {
             try
@@ -71,6 +88,16 @@ namespace AdvantageAI_Web.Controllers
                 _logger.LogError(ex, "Error uploading file {FileName}", fileName);
                 throw;
             }
+        }
+
+        public static bool operator ==(BlobServiceClientWrapperBase1 left, BlobServiceClientWrapperBase1 right)
+        {
+            return EqualityComparer<BlobServiceClientWrapperBase1>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(BlobServiceClientWrapperBase1 left, BlobServiceClientWrapperBase1 right)
+        {
+            return !(left == right);
         }
     }
 
