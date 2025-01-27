@@ -7,8 +7,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
 using NLog;
-
 using static AdvantageAIWeb.Models.AI.ChatCompletionResult;
+
+
 
 namespace AdvantageAI_Server.Services
 {
