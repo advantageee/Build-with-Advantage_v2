@@ -8,19 +8,13 @@ using Azure.Storage.Blobs.Models;
 
 namespace AdvantageAI_Web.Controllers
 {
-    public class BlobServiceClientWrapperBase
+    public class BlobServiceClientWrapperBase(App_Start.AdvantageAIService.BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapperBase> logger)
     {
-        private readonly BlobServiceClient _blobServiceClient;
+        private readonly App_Start.AdvantageAIService.BlobServiceClient _blobServiceClient = blobServiceClient;
         private readonly string _containerName = "advantageai-uploads";
-        private readonly ILogger<BlobServiceClientWrapperBase> _logger;
+        private readonly ILogger<BlobServiceClientWrapperBase> _logger = logger;
 
         internal PublicAccessType PublicAccessType { get; private set; }
-
-        public BlobServiceClientWrapperBase(BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapperBase> logger)
-        {
-            _blobServiceClient = blobServiceClient;
-            _logger = logger;
-        }
 
         public async Task<Azure.Storage.Blobs.Models.BlobProperties> GetFilePropertiesAsync(string fileName)
         {
@@ -49,6 +43,7 @@ namespace AdvantageAI_Web.Controllers
                 var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
                 await containerClient.CreateIfNotExistsAsync(PublicAccessType.Blob);
                 var blobClient = containerClient.GetBlobClient(fileName);
+                await blobClient.UploadAsync(fileStream);
                 return blobClient.Uri.ToString();
             }
             catch (Exception ex)

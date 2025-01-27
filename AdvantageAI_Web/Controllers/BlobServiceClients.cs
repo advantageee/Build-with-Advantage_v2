@@ -13,9 +13,15 @@ namespace AdvantageAI_Web.Controllers
 {
     public class BlobServiceClientWrapperBase1
     {
-        private readonly BlobServiceClient _blobServiceClient;
+        protected readonly BlobServiceClient _blobServiceClient; // Changed to protected
         private readonly string _containerName = "advantageai-uploads";
         private readonly ILogger<BlobServiceClientWrapper> _logger;
+
+        public BlobServiceClientWrapperBase1(BlobServiceClient blobServiceClient, ILogger<BlobServiceClientWrapper> logger)
+        {
+            _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
 
         public async Task<BlobProperties> GetFilePropertiesAsync(string fileName)
         {
@@ -57,16 +63,10 @@ namespace AdvantageAI_Web.Controllers
 
     public class BlobServiceClientWrapper : BlobServiceClientWrapperBase1
     {
-        private readonly App_Start.AdvantageAIService.BlobServiceClient _blobServiceClient;
-        private readonly ILogger<BlobServiceClientWrapper> _logger;
-
         public BlobServiceClientWrapper(IConfiguration configuration, ILogger<BlobServiceClientWrapper> logger)
+            : base(new BlobServiceClient(configuration.GetConnectionString("AzureStorage")), logger)
         {
-            var connectionString = configuration.GetConnectionString("AzureStorage");
-            if (string.IsNullOrEmpty(connectionString))
-                throw new ArgumentNullException(nameof(connectionString));
-            _blobServiceClient = new BlobServiceClient(connectionString);
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public ILogger<BlobServiceClientWrapper> Logger { get; }
