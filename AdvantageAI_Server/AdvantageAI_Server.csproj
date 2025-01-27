@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{01C47095-C67B-44EB-A9A6-9150A0055BD3}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AdvantageAI_Server</RootNamespace>
     <AssemblyName>AdvantageAI_Server</AssemblyName>
@@ -369,10 +369,10 @@
     <Reference Include="System.IO.Pipelines, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.9.0.1\lib\net462\System.IO.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory" >
+    <Reference Include="System.Memory">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory.Data" >
+    <Reference Include="System.Memory.Data">
       <HintPath>..\packages\System.Memory.Data.6.0.1\lib\net461\System.Memory.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
@@ -495,6 +495,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\UnityWebApiConfig.cs" />
+    <Compile Include="Azure\AI\OpenAI.cs" />
     <Compile Include="Configuration\ServiceConfig.cs" />
     <Compile Include="Interfaces\AdvantageAIService.cs" />
     <Compile Include="Interfaces\CodeGenerationService.cs" />
