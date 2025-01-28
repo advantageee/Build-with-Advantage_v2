@@ -37,13 +37,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NuGet.Resolver">
       <Version>6.12.1</Version>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="9.0.1" />
-    <PackageReference Include="System.Memory.Data" Version="1.0.2" />
-    <PackageReference Include="Azure.Identity" Version="1.11.4" />
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    <PackageReference Include="System.Memory.Data" Version="6.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.4.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="Azure.AI.Translation.Document" Version="2.0.0" />
     <PackageReference Include="Azure.AI.Translation.Text" Version="1.0.0" />
@@ -51,20 +51,26 @@
     <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Primitives" Version="9.0.1" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.1" />
-    <PackageReference Include="System.IO.Hashing" Version="7.0.0" />
-    <PackageReference Include="System.IO.Pipelines" Version="9.0.1" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.1" />
-    <PackageReference Include="System.Memory" Version="4.5.4" />
-    <PackageReference Include="System.IO.Compression" Version="4.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="5.0.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="5.0.0" />
+    <PackageReference Include="System.IO.Hashing" Version="1.0.0" />
+    <PackageReference Include="System.IO.Pipelines" Version="5.0.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="5.0.0" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
-    <PackageReference Include="System.Net.Http" Version="4.2.0" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    <PackageReference Include="Azure.Identity" Version="1.13.1" />
-    <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.66.1" />
-    <PackageReference Include="System.IO.Hashing" Version="7.0.0" />
-    <PackageReference Include="System.Memory.Data" Version="6.0.0" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="2.19.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.Web.WebPages" Version="3.2.3" />
+    <PackageReference Include="System.Web.WebPages.Deployment" Version="3.2.3" />
+    <PackageReference Include="System.Web.WebPages.Razor" Version="3.2.3" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
+    <PackageReference Include="System.ClientModel" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
