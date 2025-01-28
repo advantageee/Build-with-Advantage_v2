@@ -1,0 +1,19 @@
+<PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+</PropertyGroup>
+
+<ItemGroup>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="System.Web.WebPages" />
+    <!-- Previous system references -->
+</ItemGroup>
