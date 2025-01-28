@@ -5,9 +5,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
+using Azure;
 using Newtonsoft.Json;
 using NLog;
-using static AdvantageAIWeb.Models.AI.ChatCompletionResult;
 
 namespace AdvantageAI_Server.Services
 {
@@ -18,7 +18,7 @@ namespace AdvantageAI_Server.Services
         private readonly HttpClient _httpClient;
         private readonly Logger _logger;
 
-        public object RequestBody { get; private set; }
+        public object RequestBody { get; private set; }  // Added to implement interface
 
         public OpenAIService(string apiKey, string endpoint)
         {
@@ -42,6 +42,49 @@ namespace AdvantageAI_Server.Services
             _httpClient.DefaultRequestHeaders.Add("api-key", _apiKey);
         }
 
+        public string GenerateCodeSnippet(string prompt)  // Implemented interface method
+        {
+            return GenerateCodeSnippetAsync(prompt).GetAwaiter().GetResult();
+        }
+
+        private object GenerateCodeSnippetAsync(string prompt)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId)
+        {
+            return GetChatCompletionAsync(conversationHistory, deploymentId).GetAwaiter().GetResult();
+        }
+
+        public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory, string deploymentId)
+        {
+            if (conversationHistory == null || !conversationHistory.Any())
+            {
+                throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
+            }
+
+            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
+            var requestBody = new { messages };
+
+            try
+            {
+                var response = await SendPostRequestAsync($"/chat/completions?deploymentId={deploymentId}", requestBody);
+                var result = JsonConvert.DeserializeObject<ChatCompletionResult>(response);
+                return new AIResponse { Content = result?.Messages?.FirstOrDefault()?.Content };
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error getting chat completion");
+                throw new InvalidOperationException("Failed to get chat completion.", ex);
+            }
+        }
+
+        public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory)
+        {
+            return await GetChatCompletionAsync(conversationHistory, "default");
+        }
+
         public async Task<string> GenerateChatResponseAsync(string prompt)
         {
             if (string.IsNullOrWhiteSpace(prompt))
@@ -60,14 +103,14 @@ namespace AdvantageAI_Server.Services
             try
             {
                 var response = await SendPostRequestAsync("/chat/completions", requestBody);
-                _logger.Debug($"Chat response: {response}");
+                _logger.Debug($"Chat completionResponse: {response}");
                 var result = JsonConvert.DeserializeObject<ChatCompletionResult>(response);
-                return result?.Messages?[0]?.Content ?? string.Empty;
+                return result?.Messages?.FirstOrDefault()?.Content ?? string.Empty;
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Error generating chat response.");
-                throw new InvalidOperationException("Failed to generate chat response.", ex);
+                _logger.Error(ex, "Error generating chat completionResponse.");
+                throw new InvalidOperationException("Failed to generate chat completionResponse.", ex);
             }
         }
 
@@ -92,9 +135,9 @@ namespace AdvantageAI_Server.Services
             try
             {
                 var response = await SendPostRequestAsync("/chat/completions", requestBody);
-                _logger.Debug($"Content response: {response}");
-                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
-                return result?.Messages?[0]?.Content ?? string.Empty;
+                _logger.Debug($"Content completionResponse: {response}");
+                var result = JsonConvert.DeserializeObject<ChatCompletionResult>(response);
+                return result?.Messages?.FirstOrDefault()?.Content ?? string.Empty;
             }
             catch (Exception ex)
             {
@@ -103,9 +146,40 @@ namespace AdvantageAI_Server.Services
             }
         }
 
+        public async Task<string> GenerateCodeSnippetAsync(string prompt, string language)
+        {
+            if (string.IsNullOrWhiteSpace(prompt))
+            {
+                throw new ArgumentException("Prompt cannot be null or empty.", nameof(prompt));
+            }
+
+            var requestBody = new
+            {
+                messages = new[]
+                {
+                    new { role = "user", content = prompt }
+                },
+                language = language
+            };
+
+            try
+            {
+                var response = await SendPostRequestAsync("/chat/completions", requestBody);
+                _logger.Debug($"Code snippet completionResponse: {response}");
+                var result = JsonConvert.DeserializeObject<ChatCompletionResult>(response);
+                return result?.Messages?.FirstOrDefault()?.Content ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error generating code snippet.");
+                throw new InvalidOperationException("Failed to generate code snippet.", ex);
+            }
+        }
+
         public async Task<string> SendPostRequestAsync(string path, object requestBody)
         {
-            var json = JsonSerializer.Serialize(requestBody);
+            RequestBody = requestBody; // Set the RequestBody property
+            var json = JsonConvert.SerializeObject(requestBody);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             try
@@ -129,205 +203,21 @@ namespace AdvantageAI_Server.Services
                 throw;
             }
         }
-
-        public string GenerateCodeSnippet(string prompt)
-        {
-            return GenerateChatResponseAsync($"Generate code snippet: {prompt}").GetAwaiter().GetResult();
-        }
-
-        public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory, string deploymentId)
-        {
-            if (conversationHistory == null || conversationHistory.Count == 0)
-            {
-                throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
-            }
-
-            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
-            var requestBody = new { messages };
-
-            try
-            {
-                var response = await SendPostRequestAsync($"/chat/completions?deploymentId={deploymentId}", requestBody);
-                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
-                return new AIResponse { Content = result?.Messages?[0]?.Content };
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "Error getting chat completion");
-                throw new InvalidOperationException("Failed to get chat completion.", ex);
-            }
-        }
-
-        public async Task<string> GenerateCodeSnippetAsync(string prompt, string language)
-        {
-            if (string.IsNullOrWhiteSpace(prompt))
-            {
-                throw new ArgumentException("Prompt cannot be null or empty.", nameof(prompt));
-            }
-
-            if (string.IsNullOrWhiteSpace(language))
-            {
-                throw new ArgumentException("Language cannot be null or empty.", nameof(language));
-            }
-
-            var requestBody = new
-            {
-                messages = new[]
-                {
-                    new { role = "system", content = $"Generate a code snippet in {language}." },
-                    new { role = "user", content = prompt }
-                }
-            };
-
-            try
-            {
-                var response = await SendPostRequestAsync("/chat/completions", requestBody);
-                _logger.Debug($"Code snippet response: {response}");
-                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
-                return result?.Messages?[0]?.Content ?? string.Empty;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "Error generating code snippet.");
-                throw new InvalidOperationException("Failed to generate code snippet.", ex);
-            }
-        }
-
-        public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory)
-        {
-            if (conversationHistory == null || conversationHistory.Count == 0)
-            {
-                throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
-            }
-
-            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
-            var requestBody = new { messages };
-
-            try
-            {
-                var response = await SendPostRequestAsync("/chat/completions", requestBody);
-                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
-                return new AIResponse { Content = result?.Messages?[0]?.Content };
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "Error getting chat completion");
-                throw new InvalidOperationException("Failed to get chat completion.", ex);
-            }
-        }
-
-        public AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId)
-        {
-            if (conversationHistory == null || conversationHistory.Count == 0)
-            {
-                throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
-            }
-
-            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
-            var requestBody = new { messages };
-
-            try
-            {
-                var response = SendPostRequestAsync($"/chat/completions?deploymentId={deploymentId}", requestBody).GetAwaiter().GetResult();
-                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
-                return new AIResponse { Content = result?.Messages?[0]?.Content };
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "Error getting chat completion");
-                throw new InvalidOperationException("Failed to get chat completion.", ex);
-            }
-        }
-
-        public async Task<string> GenerateCodeSnippetAsync(string prompt)
-        {
-            if (string.IsNullOrWhiteSpace(prompt))
-            {
-                throw new ArgumentException("Prompt cannot be null or empty.", nameof(prompt));
-            }
-
-            var requestBody = new
-            {
-                messages = new[]
-                {
-                    new { role = "system", content = "Generate a code snippet." },
-                    new { role = "user", content = prompt }
-                }
-            };
-
-            try
-            {
-                var response = await SendPostRequestAsync("/chat/completions", requestBody);
-                _logger.Debug($"Code snippet response: {response}");
-                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
-                return result?.Messages?[0]?.Content ?? string.Empty;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "Error generating code snippet.");
-                throw new InvalidOperationException("Failed to generate code snippet.", ex);
-            }
-        }
-
-        Task<AIResponse> IOpenAIService.GetChatCompletionAsync(List<ChatMessage> conversationHistory)
-        {
-            return GetChatCompletionAsync(conversationHistory);
-        }
-
-        public Task<AIResponse> GetChatCompletionAsync(List<Azure.AI.OpenAI.ChatMessage> conversationHistory, string deploymentId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<string> SomeMethod()
-        {
-            var response = await _httpClient.GetAsync("some-url");
-            var result = await response.Content.ReadAsStringAsync();
-            return result;
-        }
     }
 
     public class AIResponse
     {
-        public string Content { get; internal set; }
+        public string Content { get; set; }
     }
 
-    internal class ChatCompletionResult
+    public class ChatMessage
+    {
+        public string Role { get; set; }
+        public string Content { get; set; }
+    }
+
+    public class ChatCompletionResult
     {
         public List<ChatMessage> Messages { get; set; }
-    }
-
-    internal class ChatMessageModel
-    {
-        public int Role { get; }
-        public string Content { get; }
-        public string V { get; }
-
-        public ChatMessageModel(int role, string content)
-        {
-            Role = role;
-            Content = content;
-        }
-
-        public ChatMessageModel(string v, string content)
-        {
-            V = v;
-            Content = content;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is ChatMessageModel other &&
-                   Role == other.Role &&
-                   Content == other.Content;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = -281754749;
-            hashCode = hashCode * -1521134295 + Role.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Content);
-            return hashCode;
-        }
     }
 }
