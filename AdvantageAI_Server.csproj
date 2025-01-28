@@ -1,23 +1,59 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <ProjectGuid>{01C47095-C67B-44EB-A9A6-9150A0055BD3}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AdvantageAI_Server</RootNamespace>
     <AssemblyName>AdvantageAI_Server</AssemblyName>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc" />
-    <Reference Include="System.Web.Helpers" />
-    <Reference Include="System.Web.WebPages" />
-    <!-- Previous system references -->
-    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NuGet.Resolver" Version="6.12.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.0" />
     <PackageReference Include="System.Memory.Data" Version="6.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.13.1" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.5" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="6.0.0" />
+    <PackageReference Include="System.Web.WebPages" Version="3.2.7" />
+    <PackageReference Include="System.Web.WebPages.Deployment" Version="3.2.7" />
+    <PackageReference Include="System.Web.WebPages.Razor" Version="3.2.7" />
+    <PackageReference Include="System.ClientModel" Version="1.2.1" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
+    <PackageReference Include="Unity.WebAPI" Version="5.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdvantageAI_Web\AdvantageAI_Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="AdvantageAI_Web\MvcApplication.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityWebApiActivator.cs" />
+    <Compile Include="App_Start\UnityWebApiConfig.cs" />
+    <Compile Include="Azure\AI\OpenAI.cs" />
+    <Compile Include="Configuration\ServiceConfig.cs" />
+    <Compile Include="Interfaces\*.cs" />
+    <Compile Include="Microsoft\Extensions\Logging\LoggerFactory.cs" />
+    <Compile Include="Models\**\*.cs" />
+    <Compile Include="Services\ChatCompletionResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
