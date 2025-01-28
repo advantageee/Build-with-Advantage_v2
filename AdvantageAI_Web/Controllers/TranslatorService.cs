@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using AdvantageAIWeb.Services.Interfaces;
 using NLog;
+using AdvantageAIWeb.Interfaces;
 
 namespace AdvantageAIWeb.Services
 {

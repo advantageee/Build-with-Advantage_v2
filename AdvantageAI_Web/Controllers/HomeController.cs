@@ -8,6 +8,8 @@ using AdvantageAI_Web.Models.ViewModels;
 using System.Web;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
 using AdvantageAIWeb.Models;
+using AdvantageAIWeb.Interfaces;
+using AdvantageAIWeb.Services;
 
 namespace AdvantageAI_Web.Controllers
 {

@@ -10,6 +10,8 @@ using AdvantageAIWeb.Services.Interfaces;
 using Logger = NLog.Logger;
 using Microsoft.Azure.Amqp;
 using Amazon.Auth.AccessControlPolicy;
+using AdvantageAIWeb.Interfaces;
+using Amazon;
 // Remove incorrect using directive
 // using System.Memory;
 
