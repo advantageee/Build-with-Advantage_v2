@@ -21,7 +21,7 @@ namespace AdvantageAI_Server.Models
         private readonly string _visionEndpoint;
         private readonly HttpClient _httpClient;
         private readonly Logger _logger;
-        private bool SamlCondition; // Ensure 'SamlCondition' is defined in the class
+        private readonly bool SamlCondition; // Ensure 'SamlCondition' is defined in the class
 
         public VisionService(string apiKey, string endpoint)
         {
@@ -247,8 +247,9 @@ namespace AdvantageAI_Server.Models
         {
             var collection = new List<int> { 1, 2, 3 };
 
-            Resource resource1 = new();
-            using Resource resource = resource1;
+            using (var resource = new Resource())
+            {
+            }
 
             if (SamlCondition) // Ensure 'SamlCondition' is defined in the class
             {
