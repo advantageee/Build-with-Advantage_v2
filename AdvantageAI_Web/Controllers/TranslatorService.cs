@@ -150,6 +150,11 @@ namespace AdvantageAIWeb.Services
             throw new NotImplementedException();
         }
 
+        public string Translate(string text, string targetLanguage)
+        {
+            // Implementation of the Translate method
+        }
+
         private class TranslationResponse
         {
             public Translation[] Translations { get; set; }
