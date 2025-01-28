@@ -5,6 +5,8 @@ using AdvantageAIWeb.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static AdvantageAIWeb.Models.AI.ChatCompletionResult;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AdvantageAIWeb.Services.Interfaces
 {

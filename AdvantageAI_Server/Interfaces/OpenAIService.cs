@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
+using Newtonsoft.Json;
 using NLog;
 using static AdvantageAIWeb.Models.AI.ChatCompletionResult;
 
@@ -63,7 +64,7 @@ namespace AdvantageAI_Server.Services
             {
                 var response = await SendPostRequestAsync("/chat/completions", requestBody);
                 _logger.Debug($"Chat response: {response}");
-                var result = JsonSerializer.Deserialize<ChatCompletionResult>(response);
+                var result = JsonConvert.DeserializeObject<ChatCompletionResult>(response);
                 return result?.Messages?[0]?.Content ?? string.Empty;
             }
             catch (Exception ex)
