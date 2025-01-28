@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
 using Newtonsoft.Json;
 using NLog;
 using static AdvantageAIWeb.Models.AI.ChatCompletionResult;
-
-
 
 namespace AdvantageAI_Server.Services
 {
