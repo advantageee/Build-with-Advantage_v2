@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using static AdvantageAI_Web.UnityWebApiActivator;
 using AdvantageAIWeb.Services.Interfaces;
+using System.Web.Http;
 
 namespace Unity
 {
@@ -54,6 +55,26 @@ namespace Unity
             {
                 throw new NotImplementedException();
             }
+        }
+    }
+}
+
+namespace AdvantageAI_Server.Unity
+{
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            // Web API configuration and services
+
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
         }
     }
 }
