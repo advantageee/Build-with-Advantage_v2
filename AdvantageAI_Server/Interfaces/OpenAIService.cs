@@ -203,6 +203,36 @@ namespace AdvantageAI_Server.Services
                 throw;
             }
         }
+
+        public ChatCompletionResult GetChatCompletion(List<ChatCompletionResult.ChatMessage> messages, string model)
+        {
+            // Implementation here
+            throw new NotImplementedException();
+        }
+
+        public Task<ChatCompletionResult> GetChatCompletionAsync(List<ChatCompletionResult.ChatMessage> messages)
+        {
+            // Implementation here
+            throw new NotImplementedException();
+        }
+
+        public Task<ChatCompletionResult> GetChatCompletionAsync(List<ChatMessage> messages, string model)
+        {
+            // Implementation here
+            throw new NotImplementedException();
+        }
+
+        public async Task<ChatCompletionResult> SomeMethodAsync()
+        {
+            var result = await SomeAsyncOperation();
+            return result;
+        }
+
+        private Task<ChatCompletionResult> SomeAsyncOperation()
+        {
+            // Implementation here
+            throw new NotImplementedException();
+        }
     }
 
     public class AIResponse
@@ -219,5 +249,11 @@ namespace AdvantageAI_Server.Services
     public class ChatCompletionResult
     {
         public List<ChatMessage> Messages { get; set; }
+
+        public class ChatMessage
+        {
+            public string Role { get; set; }
+            public string Content { get; set; }
+        }
     }
 }
