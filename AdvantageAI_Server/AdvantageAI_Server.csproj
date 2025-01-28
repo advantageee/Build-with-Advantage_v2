@@ -15,7 +15,6 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <RootElementName>Project</RootElementName>
     <UseAttributeForTargetFrameworkInfoPropertyNames>true</UseAttributeForTargetFrameworkInfoPropertyNames>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
