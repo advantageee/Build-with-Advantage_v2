@@ -70,6 +70,8 @@
     <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
     <PackageReference Include="System.ClientModel" Version="1.2.1" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
+    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.5" />
+    <PackageReference Include="Unity.WebAPI" Version="5.4.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.ClientModel" Version="1.2.1" />
@@ -553,6 +555,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdvantageAI_Web\AdvantageAI_Web.csproj" />
+    <ProjectReference Include="..\AdvantageAI.Shared\AdvantageAI.Shared.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" />
