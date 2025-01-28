@@ -281,6 +281,13 @@ namespace AdvantageAI_Server.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<string> SomeMethod()
+        {
+            var response = await _httpClient.GetAsync("some-url");
+            var result = await response.Content.ReadAsStringAsync();
+            return result;
+        }
     }
 
     public class AIResponse
