@@ -247,7 +247,8 @@ namespace AdvantageAI_Server.Models
         {
             var collection = new List<int> { 1, 2, 3 };
 
-            using Resource resource = new();
+            Resource resource1 = new();
+            using Resource resource = resource1;
 
             if (SamlCondition) // Ensure 'SamlCondition' is defined in the class
             {
