@@ -1,4 +1,5 @@
-<PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <UseIISExpress>true</UseIISExpress>
@@ -8,12 +9,14 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-</PropertyGroup>
+    <RootElementName>Project</RootElementName>
+  </PropertyGroup>
 
-<ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc" />
     <Reference Include="System.Web.Helpers" />
     <Reference Include="System.Web.WebPages" />
     <!-- Previous system references -->
-</ItemGroup>
+  </ItemGroup>
+</Project>
