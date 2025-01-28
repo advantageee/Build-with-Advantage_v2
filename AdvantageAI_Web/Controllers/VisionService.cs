@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
 using Logger = NLog.Logger;
+using System.Memory;
 
 namespace AdvantageAI_Server.Models
 {
@@ -232,4 +233,17 @@ namespace AdvantageAI_Server.Models
                         .GetProperty("content")
                         .GetString();
         }
+
+        public void SomeMethod()
+        {
+            var collection = new List<int> { 1, 2, 3 };
+
+            using var resource = new Resource();
+
+            if (someCondition)
+            {
+                // ...existing code...
+            } // Add missing closing brace
+        }
     }
+}
