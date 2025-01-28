@@ -7,6 +7,7 @@ using AdvantageAIWeb.Models.Image;
 using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
 using Logger = NLog.Logger;
+using AdvantageAIWeb.Models;
 
 public class DalleService : IDalleService
 {

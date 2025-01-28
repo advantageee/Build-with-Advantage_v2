@@ -1,4 +1,5 @@
-﻿using AdvantageAIWeb.Models.AI;
+﻿using AdvantageAIWeb.Models;
+using AdvantageAIWeb.Models.AI;
 using AdvantageAIWeb.Models.Chat;
 using AdvantageAIWeb.ViewModels;
 using System;

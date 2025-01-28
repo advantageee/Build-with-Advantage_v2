@@ -1,4 +1,5 @@
-﻿using AdvantageAIWeb.Services.Interfaces;
+﻿using AdvantageAI_Web.App_Start;
+using AdvantageAIWeb.Services.Interfaces;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -6,7 +7,7 @@ using System;
 using AdvantageAI_Web.Models.ViewModels;
 using System.Web;
 using static AdvantageAI_Web.App_Start.AdvantageAIService;
-using AdvantageAI_Web.App_Start;
+using AdvantageAIWeb.Models;
 
 namespace AdvantageAI_Web.Controllers
 {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using static AdvantageAI_Web.UnityWebApiActivator;
+using AdvantageAIWeb.Services.Interfaces;
 
 namespace Unity
 {

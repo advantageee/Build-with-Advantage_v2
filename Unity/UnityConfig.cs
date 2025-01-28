@@ -41,6 +41,6 @@ namespace AdvantageAIWeb
             RegisterTypes(container);
         }
     }
-       }
+}
 
 
