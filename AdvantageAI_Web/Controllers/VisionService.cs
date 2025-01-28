@@ -248,6 +248,8 @@ namespace AdvantageAI_Server.Models
             if (SamlCondition) // Ensure 'SamlCondition' is defined in the class
             {
             }
+
+            var result = (new VisionService(), "someValue");
         }
     }
     public class Resource : IDisposable
