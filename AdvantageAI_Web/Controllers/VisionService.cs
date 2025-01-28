@@ -4,10 +4,12 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Collections.Generic; // Add this
 using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
 using Logger = NLog.Logger;
-using System.Memory;
+// Remove incorrect using directive
+// using System.Memory;
 
 namespace AdvantageAI_Server.Models
 {
@@ -240,7 +242,7 @@ namespace AdvantageAI_Server.Models
 
             using var resource = new Resource();
 
-            if (someCondition)
+            if (someCondition) // Ensure 'someCondition' is defined in the class
             {
                 // ...existing code...
             } // Add missing closing brace
