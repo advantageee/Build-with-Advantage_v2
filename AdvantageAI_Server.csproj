@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Remove duplicate package references -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NuGet.Resolver" Version="6.12.1" />
     <PackageReference Include="System.Text.Json" Version="6.0.0" />
