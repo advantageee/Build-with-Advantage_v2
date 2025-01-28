@@ -215,6 +215,7 @@ namespace AdvantageAI_Server.Models
             }
         }
 
+
         private async Task<string> SendRequestAsync(object requestBody)
         {
             var json = JsonSerializer.Serialize(requestBody);
@@ -232,4 +233,3 @@ namespace AdvantageAI_Server.Models
                         .GetString();
         }
     }
-}
