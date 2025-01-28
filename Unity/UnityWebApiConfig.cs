@@ -2,7 +2,7 @@ using System;
 using Unity;
 using static AdvantageAI_Web.UnityWebApiActivator;
 using AdvantageAIWeb.Services.Interfaces;
-using AdvantageAIWeb.Services.Interfaces;
+using AdvantageAI_Server.UnityWebApiActivator;
 
 namespace AdvantageAI_Server
 {
