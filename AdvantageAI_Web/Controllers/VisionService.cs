@@ -8,6 +8,8 @@ using System.Collections.Generic; // Add this
 using AdvantageAIWeb.Services;
 using AdvantageAIWeb.Services.Interfaces;
 using Logger = NLog.Logger;
+using Microsoft.Azure.Amqp;
+using Amazon.Auth.AccessControlPolicy;
 // Remove incorrect using directive
 // using System.Memory;
 
@@ -19,6 +21,7 @@ namespace AdvantageAI_Server.Models
         private readonly string _visionEndpoint;
         private readonly HttpClient _httpClient;
         private readonly Logger _logger;
+        private bool SamlCondition; // Ensure 'SamlCondition' is defined in the class
 
         public VisionService(string apiKey, string endpoint)
         {
@@ -240,12 +243,29 @@ namespace AdvantageAI_Server.Models
         {
             var collection = new List<int> { 1, 2, 3 };
 
-            using var resource = new Resource();
+            using Resource resource = new();
 
-            if (someCondition) // Ensure 'someCondition' is defined in the class
+            if (SamlCondition) // Ensure 'SamlCondition' is defined in the class
             {
-                // ...existing code...
-            } // Add missing closing brace
+            }
+        }
+    }
+    public class Resource : IDisposable
+    {
+        public string Id { get; }
+
+        public Resource(string id)
+        {
+            Id = id;
+        }
+
+        public Resource()
+        {
+        }
+
+        public void Dispose()
+        {
+            // Dispose resources here
         }
     }
 }
