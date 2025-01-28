@@ -33,6 +33,7 @@ namespace AdvantageAIWeb.Services.Interfaces
         /// <param name="language">The programming language for the code snippet.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the generated code snippet.</returns>
         Task<string> GenerateCodeSnippetAsync(string prompt, string language);
+        Task<string> GenerateCodeSnippetAsync(string prompt);
         Task<string> GenerateContentAsync(string prompt);
         AIResponse GetChatCompletion(List<AdvantageAIWeb.Models.AI.ChatCompletionResult.ChatMessage> conversationHistory, string deploymentId);
         /// <summary>

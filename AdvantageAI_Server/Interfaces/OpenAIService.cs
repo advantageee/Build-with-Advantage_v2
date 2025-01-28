@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AdvantageAIWeb.Services.Interfaces;
 using Azure;
+using Microsoft.Graph.Chats.Item.Members.Add;
 using Newtonsoft.Json;
 using NLog;
 
@@ -19,6 +20,8 @@ namespace AdvantageAI_Server.Services
         private readonly Logger _logger;
 
         public object RequestBody { get; private set; }  // Added to implement interface
+
+        object IOpenAIService.RequestBody => throw new NotImplementedException();
 
         public OpenAIService(string apiKey, string endpoint)
         {
@@ -47,42 +50,38 @@ namespace AdvantageAI_Server.Services
             return GenerateCodeSnippetAsync(prompt).GetAwaiter().GetResult();
         }
 
-        private object GenerateCodeSnippetAsync(string prompt)
+        public async Task<string> GenerateCodeSnippetAsync(string prompt)
         {
-            throw new NotImplementedException();
-        }
-
-        public AIResponse GetChatCompletion(List<ChatMessage> conversationHistory, string deploymentId)
-        {
-            return GetChatCompletionAsync(conversationHistory, deploymentId).GetAwaiter().GetResult();
-        }
-
-        public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory, string deploymentId)
-        {
-            if (conversationHistory == null || !conversationHistory.Any())
+            if (string.IsNullOrWhiteSpace(prompt))
             {
-                throw new ArgumentException("Conversation history cannot be null or empty.", nameof(conversationHistory));
+                throw new ArgumentException("Prompt cannot be null or empty.", nameof(prompt));
             }
 
-            var messages = conversationHistory.Select(msg => new { role = msg.Role.ToString().ToLowerInvariant(), content = msg.Content }).ToArray();
-            var requestBody = new { messages };
+            var requestBody = new
+            {
+                messages = new[]
+                {
+                    new { role = "user", content = prompt }
+                }
+            };
 
             try
             {
-                var response = await SendPostRequestAsync($"/chat/completions?deploymentId={deploymentId}", requestBody);
+                var response = await SendPostRequestAsync("/chat/completions", requestBody);
+                _logger.Debug($"Code snippet completionResponse: {response}");
                 var result = JsonConvert.DeserializeObject<ChatCompletionResult>(response);
-                return new AIResponse { Content = result?.Messages?.FirstOrDefault()?.Content };
+                return result?.Messages?.FirstOrDefault()?.Content ?? string.Empty;
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Error getting chat completion");
-                throw new InvalidOperationException("Failed to get chat completion.", ex);
+                _logger.Error(ex, "Error generating code snippet.");
+                throw new InvalidOperationException("Failed to generate code snippet.", ex);
             }
         }
-
         public async Task<AIResponse> GetChatCompletionAsync(List<ChatMessage> conversationHistory)
         {
-            return await GetChatCompletionAsync(conversationHistory, "default");
+            var chatCompletionResult = await GetChatCompletionAsync(messages: conversationHistory, "default");
+            return new AIResponse { Content = chatCompletionResult.Messages.FirstOrDefault()?.Content };
         }
 
         public async Task<string> GenerateChatResponseAsync(string prompt)
@@ -231,6 +230,56 @@ namespace AdvantageAI_Server.Services
         private Task<ChatCompletionResult> SomeAsyncOperation()
         {
             // Implementation here
+            throw new NotImplementedException();
+        }
+
+        Task<string> IOpenAIService.GenerateChatResponseAsync(string prompt)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IOpenAIService.GenerateCodeSnippet(string prompt)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<string> IOpenAIService.GenerateCodeSnippetAsync(string prompt, string language)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<string> IOpenAIService.GenerateContentAsync(string prompt)
+        {
+            throw new NotImplementedException();
+        }
+
+        AIResponse IOpenAIService.GetChatCompletion(List<AdvantageAIWeb.Models.AI.ChatCompletionResult.ChatMessage> conversationHistory, string deploymentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<AIResponse> IOpenAIService.GetChatCompletionAsync(List<ChatMessage> conversationHistory, string deploymentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<AIResponse> IOpenAIService.GetChatCompletionAsync(List<AdvantageAIWeb.Models.AI.ChatCompletionResult.ChatMessage> conversationHistory)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<AIResponse> IOpenAIService.GetChatCompletionAsync(List<Azure.AI.OpenAI.ChatMessage> conversationHistory, string deploymentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<AddResponse> IOpenAIService.GetChatCompletionAsync(List<ChatMessage> conversationHistory)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<string> IOpenAIService.SendPostRequestAsync(string path, object requestBody)
+        {
             throw new NotImplementedException();
         }
     }
