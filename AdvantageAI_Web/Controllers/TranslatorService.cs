@@ -153,6 +153,8 @@ namespace AdvantageAIWeb.Services
         public string Translate(string text, string targetLanguage)
         {
             // Implementation of the Translate method
+            var translatedText = ""; // Placeholder for the actual translation logic
+            return translatedText; // Ensure a value is returned
         }
 
         private class TranslationResponse
